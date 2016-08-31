@@ -1,0 +1,52 @@
+<!-- ***********
+Project Name: Calculator
+File Name: index.html
+Author: Lance Takiguchi
+Date: 08/31/2016 Time: 12:26
+Objective: Create a basic skeleton for a calculator so that later it can be given functionality
+Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
+ *********** -->
+<!doctype html>
+<html>
+<head>
+    <title> Calculator | Lance Takiguchi </title>
+    <!--Style Links-->
+    <link rel="stylesheet" type="text/css" href="style.css"> <!--My Style Sheet-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Calculator v0.1</h1>
+    </header>
+    <div id="main_body">
+        <div id="calc_body">
+            <div id="display">  </div> <!--TODO: Create overhead shadow for displaying the calulation as a long term whole-->
+            <div id="clear_buttons" class="buttons">
+                <button>C</button>
+                <button>CE</button>
+            </div>
+            <div id="operator_buttons" class="buttons">
+                <button>&divide;</button>
+                <button>x</button>
+                <button>-</button>
+                <button id="addition_symbol">+</button> <!--Given ID because bigger size-->
+            </div> <!--**Just the +, -, *, /-->
+            <div id="num_decimal_equals_button">
+                <button> 7 </button>
+                <button> 8 </button>
+                <button> 9 </button>
+                <button> 4 </button>
+                <button> 5 </button>
+                <button> 6 </button>
+                <button> 1 </button>
+                <button> 2 </button>
+                <button> 3 </button>
+                <button> 0 </button>
+                <button> . </button>
+                <button> = </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
