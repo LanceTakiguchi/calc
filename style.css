@@ -1,10 +1,10 @@
 /*
-Project Name: Calculator
+Project Name: Calculator version 0.5
 File Name: style.css
 Author: Lance Takiguchi
-Date: 08/31/2016 Time: 12:36
-Objective: Create a basic styling for the basic skeleton. To be used later for a calculator so that later it can be given functionality
-Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
+Date: 09/01/2016 Time: 11:14
+Objective: Create a basic styling for the basic skeleton.
+Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.5#getting-started
 */
 /* Color Choice 02. https://designschool.canva.com/blog/100-color-combinations/ */
 
@@ -27,7 +27,7 @@ header h1{ /* The main header text */
     width: 100vw;
     position: absolute;
 }
-/* Calculator */ /*TODO: Adjust for mobile*/
+/* Calculator */
 /* here the rules for windows between 500px and 900px */
 
 #calc_body {
@@ -77,6 +77,8 @@ header h1{ /* The main header text */
     width: 90%;
     background-color: #C8D7E2; /* mist 50% tint*/
     margin: auto;
+    font-size: 200%;
+    /*TODO: Make text show on bottom*/
 }
 #display_equation_log{
     height: 20%;
@@ -98,7 +100,7 @@ header h1{ /* The main header text */
     position: relative;
     display: inline-block;
 }
-#clear_buttons button{ /*TODO: Change color & font size & background-color*/
+#clear_buttons button{
     height: 90%;
     width: 43%;
     background-color: #90AFC5; /* mist */

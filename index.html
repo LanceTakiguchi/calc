@@ -1,10 +1,10 @@
 <!-- ***********
-Project Name: Calculator
+Project Name: Calculator version 0.5
 File Name: index.html
 Author: Lance Takiguchi
-Date: 08/31/2016 Time: 12:26
-Objective: Create a basic skeleton for a calculator so that later it can be given functionality
-Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
+Date: 09/01/2016 Time: 11:11
+Objective: Connect the calculator to a LearningFuze js file to give it functionality
+Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.5#getting-started
  *********** -->
 <!doctype html>
 <html>
@@ -13,6 +13,9 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
     <!--Style Links-->
     <link rel="stylesheet" type="text/css" href="style.css"> <!--My Style Sheet-->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!--Just for font and clean webpage edges-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://Learning-Fuze.github.io/calculator/calculator.js"></script> <!--LearningFuze Calculator functionality-->
+    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -23,18 +26,18 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
             <div id="display_section">
                 <div id="display_equation_log">  </div>
                 <div id="display">  </div>
-            </div> <!--TODO: Create overhead shadow for displaying the calculation as a long term whole-->
+            </div>
             <div id="clear_buttons" class="buttons">
                 <button>C</button>
                 <button id="last_clear">CE</button>
             </div>
             <div id="operator_buttons" class="buttons">
-                <button>&divide;</button>
+                <button value="/">&divide;</button>
                 <button>x</button>
                 <button>-</button>
                 <button id="addition_symbol">+</button> <!--Given ID because bigger size-->
             </div> <!--**Just the +, -, *, /-->
-            <div id="num_decimal_equals_button">
+            <div id="num_decimal_equals_button" class="buttons">
                 <button> 7 </button>
                 <button> 8 </button>
                 <button> 9 </button>
@@ -46,7 +49,7 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
                 <button> 3 </button>
                 <button> 0 </button>
                 <button> . </button>
-                <button> = </button>
+                <button value="="> = </button> <!--**For some reason, doesn't like the text =-->
             </div>
         </div>
     </div>
