@@ -27,8 +27,10 @@ header h1{ /* The main header text */
     width: 100vw;
     position: absolute;
 }
-/* Calculator */
-#calc_body{
+/* Calculator */ /*TODO: Adjust for mobile*/
+/* here the rules for windows between 500px and 900px */
+
+#calc_body {
     background-color: #336B87; /* color: stone */
     height: 66.7vh;
     width: 40vw;
@@ -38,13 +40,24 @@ header h1{ /* The main header text */
     text-align: center; /* **Centered buttons nicely */
     border-radius: 25px;
 }
+
 /* here the rules for small windows */
 @media (max-width: 500px) {
     #calc_body{
         background-color: #336B87; /* color: stone */
         height: 66.7vh;
         width: 90vw;
-        max-width: 500px; /* **So that it doesn't look fat in a wide screen*/
+        margin: 8.3vh auto;
+        position: relative;
+        text-align: center; /* **Centered buttons nicely */
+        border-radius: 25px;
+    }
+}
+@media (min-width: 500px) and (max-width: 1000px) {
+    #calc_body{
+        background-color: #336B87; /* color: stone */
+        height: 66.7vh;
+        width: 80vw;
         margin: 8.3vh auto;
         position: relative;
         text-align: center; /* **Centered buttons nicely */
