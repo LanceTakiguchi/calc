@@ -12,8 +12,7 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
     <title> Calculator | Lance Takiguchi </title>
     <!--Style Links-->
     <link rel="stylesheet" type="text/css" href="style.css"> <!--My Style Sheet-->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!--Just for font and clean webpage edges-->
 </head>
 <body>
     <header>
@@ -22,11 +21,12 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
     <div id="main_body">
         <div id="calc_body">
             <div id="display_section">
+                <div id="display_equation_log">  </div>
                 <div id="display">  </div>
-            </div> <!--TODO: Create overhead shadow for displaying the calulation as a long term whole-->
+            </div> <!--TODO: Create overhead shadow for displaying the calculation as a long term whole-->
             <div id="clear_buttons" class="buttons">
                 <button>C</button>
-                <button>CE</button>
+                <button id="last_clear">CE</button>
             </div>
             <div id="operator_buttons" class="buttons">
                 <button>&divide;</button>

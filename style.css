@@ -11,12 +11,14 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v0.1#getting-started
 /* Header */
 header{
     background-color: #336B87; /* color: stone */
-    color: white;
     height: 16.7vh; /* 1/6 of the total height */
     padding-top: 5vh; /* Cover the white showing on top the header */
 }
 header h1{ /* The main header text */
-    font-size: 8vh;
+    font-size:650%;
+    text-align: center;
+    margin-top: auto;
+    color: #C8D7E2; /* mist 50% tint*/
 }
 /* main body */
 #main_body{
@@ -30,28 +32,54 @@ header h1{ /* The main header text */
     background-color: #336B87; /* color: stone */
     height: 66.7vh;
     width: 40vw;
-    margin-top: 8.3vh;
+    max-width: 500px; /* **So that it doesn't look fat in a wide screen*/
+    margin: 8.3vh auto;
     position: relative;
+    text-align: center; /* **Centered buttons nicely */
+    border-radius: 25px;
 }
+/* here the rules for small windows */
+@media (max-width: 500px) {
+    #calc_body{
+        background-color: #336B87; /* color: stone */
+        height: 66.7vh;
+        width: 90vw;
+        max-width: 500px; /* **So that it doesn't look fat in a wide screen*/
+        margin: 8.3vh auto;
+        position: relative;
+        text-align: center; /* **Centered buttons nicely */
+        border-radius: 25px;
+    }
+}
+
 /* Display */
 #display_section{
     height: 25%;
     width: 100%;
     position: relative;
+    padding-top: 5%; /** *Creates calculator's top spacing/margin */
 }
 #display{
-    height: 85%;
+    height: 60%;
     width: 90%;
-    background-color: lightskyblue;
+    background-color: #C8D7E2; /* mist 50% tint*/
     margin: auto;
+}
+#display_equation_log{
+    height: 20%;
+    width: 90%;
+    margin: auto;
+    background-color: #90AFC5; /* mist */
 }
 /* Buttons */
 #calc_body button{
-    font-size: 350%;
-    font-weight: 700
+    font-size: 430%;
+    font-weight: 700;
+    border-radius: 5px;
 }
 /* Clear Buttons */
 #clear_buttons{
+    font-size: 82%; /* **85% scale of calc_body button font-size */
     height: 12.5%;
     width: 74%;
     position: relative;
@@ -59,10 +87,13 @@ header h1{ /* The main header text */
 }
 #clear_buttons button{ /*TODO: Change color & font size & background-color*/
     height: 90%;
-    width: 46%;
-    background-color: #3678ff;
-    color: white;
+    width: 43%;
+    background-color: #90AFC5; /* mist */
+    color: #C8D7E2; /* mist 50% tint*/
     border-color: transparent;
+}
+#clear_buttons #last_clear{
+    margin-left: 3%; /** *Creates space between the clear buttons */
 }
 /* Operator_buttons */
 #operator_buttons{
@@ -75,14 +106,14 @@ header h1{ /* The main header text */
 }
 #operator_buttons button{
     height: 18%;
-    width: 90%;
-    margin: 1%; /** *Creates space between the buttons*/
-    background-color: darkred;
-    color: white;
+    width: 85%;
+    margin: 2% 20% 2% 0; /** *Creates space between the buttons and calculator */
+    background-color: #763626; /* autumn foliage */
+    color: #C8D7E2; /* mist 50% tint*/
     border-color: transparent;
 }
 #operator_buttons #addition_symbol{
-    height: 36%;
+    height: 35%; /* **Too make it bigger than the rest of the operator buttons */
 }
 /* Numbers, decimal, equals buttons */
 #num_decimal_equals_button{
@@ -91,8 +122,10 @@ header h1{ /* The main header text */
     position: relative;
 }
 #num_decimal_equals_button button{
-    height: 24%;
-    width: 30%;
+    height: 22%;
+    width: 27%;
+    color: #2A3132; /* shadow */
     border-color: transparent;
-    margin: 0.5%; /** *Space between the buttons*/
+    background-color: #C8D7E2; /* mist 50% tint*/
+    margin: 1%; /** *Space between the buttons*/
 }
