@@ -92,6 +92,9 @@ header h1{ /* The main header text */
     font-weight: 700;
     border-radius: 5px;
 }
+#calc_body button:active {
+    transform: translateY(3px);
+}
 /* Clear Buttons */
 #clear_buttons{
     font-size: 82%; /* **85% scale of calc_body button font-size */
