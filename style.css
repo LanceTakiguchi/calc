@@ -101,7 +101,7 @@ header h1{ /* The main header text */
     position: relative;
     display: inline-block;
 }
-#clear_buttons button{ /*TODO: Change color & font size & background-color*/
+#clear_buttons button{
     height: 90%;
     width: 43%;
     background-color: #90AFC5; /* mist */
