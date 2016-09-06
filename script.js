@@ -60,8 +60,13 @@ var handle_type = function(button){
                                                     // the array's last input is now an operator, therefore,
                                                     // the was_last_button_operator flag is true
             }
-        }else{
+        }else{ // ** C was pressed; Clear all.
             console.log("That's a clear all");
+            string_into_array(button);
+            was_last_button_operator = false;
+            display(0)
+            index = 0;
+            solution = null; // ** Just in case
         }
     }else if(button.type == "decimal"){
         console.log("That's a decimal");
@@ -87,8 +92,13 @@ var string_into_array = function(last_input){
         equation_string_array[index] = last_input.value;
         current_string = "";
     }else if(last_input.type == "clear"){
-        equation_string_array.pop();
-        current_string = "";
+        if(last_input.value == "ce"){
+            equation_string_array.pop();
+            current_string = "";
+        }else{
+            equation_string_array = [];
+            current_string = "";
+        }
     }else{ /* **It is a number */
         if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */ /*TODO: Check if this is being used*/
             was_last_button_operator = false;
@@ -137,6 +147,7 @@ var division_operator = function(num1, num2){
 }
 /* ** Run the js functions */
 $(document).ready(function(){
+    display(0); // ** Default loaded calculator displays 0.
     $('.buttons button').on('click', function () {
         var button_input = $(this);
         handle_type(determine_type(button_input[0]));
