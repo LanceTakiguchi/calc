@@ -56,10 +56,11 @@ var handle_type = function(button){
         console.log("That's a decimal");
     }else if(button.type == "equals"){
         console.log("that's an equals");
-        solution = equals_operator(equation_string_array[index-2], equation_string_array[index], equation_string_array[index-1]);
+        solution = equals_operator( /* ** Call appropriate operator function */
+            equation_string_array[index-2], // **num1
+            equation_string_array[index], // **num2
+            equation_string_array[index-1]); // **operator
         display(solution);
-        /*TODO: Handel equals*/
-        /* ** Call appropriate operator function */
     }else{ /* If it was a number */
         string_into_array(button);
         display(current_string);
@@ -81,26 +82,36 @@ var string_into_array = function(last_input){
         equation_string_array[index] = current_string;
     }
 };
-/* **display function: shows parameter into the calculator's display */
+/* **display function: shows parameter into the calculator's display. */
 var display = function(display_this){
     /*console.log(display_this);*//*TODO: delete*/
     $("#display").html(display_this);
     console.log(equation_string_array)
 };
-equals_operator = function (num1, num2, operator) {
+// ** Takes two numbers and an operator's string.
+    // It determines what kind of operation to perform
+    // and calls the appropriate operator function and returns the result.
+var equals_operator = function (num1, num2, operator) {
     if(operator == "+"){
         return addition_operator(num1, num2);
-    }
-    else if(operator == "-"){
+    }else if(operator == "-"){
         return subtraction_operator(num1, num2);
+    }else if(operator == 'x'){
+        return multiplication_operator(num1, num2);
     }
-}
-addition_operator = function (num1, num2){
+};
+// **Passed 2 numbers, the functions adds them and returns the value
+var addition_operator = function (num1, num2){
     return Number(num1) + Number(num2); /*TODO: Change from hardcoded to last two numbers*/
 };
-subtraction_operator = function(num1, num2){
+// **Passed 2 numbers, the functions subtracts them and returns the value
+var subtraction_operator = function(num1, num2){
     return Number(num1) - Number(num2);
 };
+// **Passed 2 numbers, the functions multiplies them and returns the value
+var multiplication_operator = function(num1, num2){
+    return Number(num1) * Number(num2)
+}
 /* ** Run the js functions */
 $(document).ready(function(){
     $('.buttons button').on('click', function () {
