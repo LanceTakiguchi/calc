@@ -98,19 +98,25 @@ var equals_operator = function (num1, num2, operator) {
         return subtraction_operator(num1, num2);
     }else if(operator == 'x'){
         return multiplication_operator(num1, num2);
+    }else if(operator == "/"){
+        return division_operator(num1, num2);
     }
 };
-// **Passed 2 numbers, the functions adds them and returns the value
+// **Passed 2 numbers. The functions adds them and returns the value.
 var addition_operator = function (num1, num2){
     return Number(num1) + Number(num2); /*TODO: Change from hardcoded to last two numbers*/
 };
-// **Passed 2 numbers, the functions subtracts them and returns the value
+// **Passed 2 numbers. The functions subtracts them and returns the value.
 var subtraction_operator = function(num1, num2){
     return Number(num1) - Number(num2);
 };
-// **Passed 2 numbers, the functions multiplies them and returns the value
+// **Passed 2 numbers. The functions multiplies them and returns the value.
 var multiplication_operator = function(num1, num2){
-    return Number(num1) * Number(num2)
+    return Number(num1) * Number(num2);
+}
+// **Passed 2 numbers. The functions divides them and returns the value.
+var division_operator = function(num1, num2){
+    return Number(num1) / Number(num2);
 }
 /* ** Run the js functions */
 $(document).ready(function(){
