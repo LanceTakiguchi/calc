@@ -11,8 +11,8 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 var equation_string_array = []; // ** The array that holds all the inputs of current use
 var index = 0; // ** index for equation_string_array
 var current_string = ""; // ** Holds the last number inputs or operator
-var was_last_button_operator; /* **Flag to tell if the last input was an operator*/
-var solution; /* **the solution to the last operation */
+var was_last_button_operator = null; /* **Flag to tell if the last input was an operator*/
+var solution = null; /* **the solution to the last operation */
 /* ** Run the js functions */
 $(document).ready(function(){
     display(0); // ** Default loaded calculator displays 0.
@@ -69,7 +69,6 @@ var handle_type = function(button){
             was_last_button_operator = false;
             display(0)
             index = 0;
-            solution = null; // ** Just in case
         }
     }else if(button.type == "decimal"){
         was_last_button_operator = false;
@@ -83,6 +82,11 @@ var handle_type = function(button){
         was_last_button_operator = false;
         display(solution);
     }else{ /* If it was a number */
+        if(typeof(solution) == "number"){ // ** If last inputs were number, operator, number, equals, number,
+            // then act like there was a clear pressed first
+            clear_all_string();
+            clear_all();
+        }
         string_into_array(button);
         was_last_button_operator = false;
         display(current_string);
@@ -100,8 +104,7 @@ var string_into_array = function(last_input){
             equation_string_array.pop();
             current_string = "";
         }else{ // ** button c was pressed; aka, clear all
-            equation_string_array = [];
-            current_string = "";
+            clear_all();
         }
     }else if(last_input.type == "decimal"){
         var decimal_flag = false; // ** If true, there is already a decimal in the current_string
@@ -126,6 +129,11 @@ var string_into_array = function(last_input){
         current_string += last_input.value;
         equation_string_array[index] = current_string;
     }
+};
+// ** Clears all of the strings
+var clear_all_string = function(){
+    equation_string_array = [];
+    current_string = "";
 };
 /* **display function: shows parameter into the calculator's display. */
 var display = function(display_this){
@@ -162,4 +170,9 @@ var multiplication_operator = function(num1, num2){
 // **Passed 2 numbers. The functions divides them and returns the value.
 var division_operator = function(num1, num2){
     return Number(num1) / Number(num2);
+}
+var clear_all = function(){
+    solution = null;
+    index = 0;
+    was_last_button_operator = null;
 }
