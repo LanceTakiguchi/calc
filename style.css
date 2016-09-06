@@ -3,8 +3,9 @@ Project Name: Calculator version 1.0
 File Name: style.css
 Author: Lance Takiguchi
 Date: 09/02/2016 Time: 10:41
+09/05/2016 16:00, 9/6/2016 09:07
 Objective: Create a basic styling for the basic skeleton.
-Prompt: https://github.com/Learning-Fuze/calculator/tree/v1.0#getting-started
+Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 */
 /* Color Choice 02. https://designschool.canva.com/blog/100-color-combinations/ */
 
@@ -15,7 +16,7 @@ header{
     padding-top: 5vh; /* Cover the white showing on top the header */
 }
 header h1{ /* The main header text */
-    font-size:650%;
+    font-size: 5.5vmax;
     text-align: center;
     margin-top: auto;
     color: #C8D7E2; /* mist 50% tint*/
@@ -28,8 +29,6 @@ header h1{ /* The main header text */
     position: absolute;
 }
 /* Calculator */
-/* here the rules for windows between 500px and 900px */
-
 #calc_body {
     background-color: #336B87; /* color: stone */
     height: 66.7vh;
@@ -40,7 +39,6 @@ header h1{ /* The main header text */
     text-align: center; /* **Centered buttons nicely */
     border-radius: 25px;
 }
-
 /* here the rules for small windows */
 @media (max-width: 500px) {
     #calc_body{
@@ -51,6 +49,11 @@ header h1{ /* The main header text */
         position: relative;
         text-align: center; /* **Centered buttons nicely */
         border-radius: 25px;
+    }
+    #calc_body button{
+        font-size: 5vmax;;
+        font-weight: 700;
+        border-radius: 5px;
     }
 }
 @media (min-width: 500px) and (max-width: 1000px) {
@@ -63,8 +66,12 @@ header h1{ /* The main header text */
         text-align: center; /* **Centered buttons nicely */
         border-radius: 25px;
     }
+    #calc_body button{
+        font-size: 5vmax;;
+        font-weight: 700;
+        border-radius: 5px;
+    }
 }
-
 /* Display */
 #display_section{
     height: 25%;
@@ -88,16 +95,15 @@ header h1{ /* The main header text */
 }
 /* Buttons */
 #calc_body button{
-    font-size: 430%;
+    font-size: 2.5vmax;;
     font-weight: 700;
     border-radius: 5px;
 }
-#calc_body button:active {
+#calc_body button:active { /* **The pressed button effect */
     transform: translateY(3px);
 }
 /* Clear Buttons */
 #clear_buttons{
-    font-size: 82%; /* **85% scale of calc_body button font-size */
     height: 12.5%;
     width: 74%;
     position: relative;
