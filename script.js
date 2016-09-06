@@ -11,7 +11,6 @@ var equation_string_array = [];
 var index = 0;
 var current_string = "";
 var was_last_button_operator; /* **Used to reset the current_string */
-var unsolved_operation; /* **Used to know when to do an operation */
 var solution; /* **the solution to the last operation */
 //* **Determines what kind of button was pushed */
 var determine_type = function(button){
@@ -32,39 +31,52 @@ var determine_type = function(button){
  * to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
-        last_button_operator = true;
-        unsolved_operation = true; /*TODO: make this usful*/
         index++;
         string_into_array(button);
         index++;
         if(button.value == "/"){
             console.log("That's a divide");
+            was_last_button_operator = true;
         }else if(button.value == "x"){
             console.log("That's a multiply");
+            was_last_button_operator = true;
         }else if(button.value == "-"){
             console.log("That's a subtract");
+            was_last_button_operator = true;
         }else{
             console.log("That's addtion");;
+            was_last_button_operator = true;
         }
     }else if(button.type == "clear"){
         if (button.value == "ce"){
             console.log("That's a clear");
-            string_into_array(button);
-            display(current_string);
+            // **If the last_button was a operator, we do not care to clear the number
+            if(was_last_button_operator){ /*TODO: Change to check number*/
+                display(0);
+            }else{
+                string_into_array(button);
+                display(0);
+                was_last_button_operator = true; // **Because we are clearing the last input, which was a number,
+                                                    // the array's last input is now an operator, therefore,
+                                                    // the was_last_button_operator flag is true
+            }
         }else{
             console.log("That's a clear all");
         }
     }else if(button.type == "decimal"){
         console.log("That's a decimal");
+        was_last_button_operator = false;
     }else if(button.type == "equals"){
         console.log("that's an equals");
         solution = equals_operator( /* ** Call appropriate operator function */
             equation_string_array[index-2], // **num1
             equation_string_array[index], // **num2
             equation_string_array[index-1]); // **operator
+        was_last_button_operator = false;
         display(solution);
     }else{ /* If it was a number */
         string_into_array(button);
+        was_last_button_operator = false;
         display(current_string);
         /*TODO: Handle a number input after an equals/result input*/
     }
@@ -78,7 +90,7 @@ var string_into_array = function(last_input){
         equation_string_array.pop();
         current_string = "";
     }else{ /* **It is a number */
-        if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */
+        if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */ /*TODO: Check if this is being used*/
             was_last_button_operator = false;
             current_string = "";
         }
