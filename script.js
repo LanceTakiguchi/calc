@@ -49,6 +49,8 @@ var handle_type = function(button){
     }else if(button.type == "clear"){
         if (button.value == "ce"){
             console.log("That's a clear");
+            string_into_array(button);
+            display(current_string);
         }else{
             console.log("That's a clear all");
         }
@@ -71,6 +73,9 @@ var handle_type = function(button){
 var string_into_array = function(last_input){
     if(last_input.type == "operator"){
         equation_string_array[index] = last_input.value;
+        current_string = "";
+    }else if(last_input.type == "clear"){
+        equation_string_array.pop();
         current_string = "";
     }else{ /* **It is a number */
         if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */
