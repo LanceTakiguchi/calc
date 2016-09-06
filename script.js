@@ -10,7 +10,7 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 var equation_string_array = [];
 var index = 0;
 var current_string = "";
-var last_button_operator; /* **Used to reset the current_string */
+var was_last_button_operator; /* **Used to reset the current_string */
 var unsolved_operation; /* **Used to know when to do an operation */
 var solution; /* **the solution to the last operation */
 //* **Determines what kind of button was pushed */
@@ -56,22 +56,24 @@ var handle_type = function(button){
         console.log("That's a decimal");
     }else if(button.type == "equals"){
         console.log("that's an equals");
-        solution = addition_operator();
+        solution = equals_operator(equation_string_array[index-2], equation_string_array[index], equation_string_array[index-1]);
         display(solution);
         /*TODO: Handel equals*/
         /* ** Call appropriate operator function */
-    }else{ /* If it was a number */ /*TODO: CURRENT*/
+    }else{ /* If it was a number */
         string_into_array(button);
         display(current_string);
+        /*TODO: Handle a number input after an equals/result input*/
     }
 }
 /* **string_into_array: 1 parameters object with type, value. if it is a number, add to string, if operator, put into next index */
 var string_into_array = function(last_input){
     if(last_input.type == "operator"){
         equation_string_array[index] = last_input.value;
+        current_string = "";
     }else{ /* **It is a number */
-        if(last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */
-            last_button_operator = false;
+        if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */
+            was_last_button_operator = false;
             current_string = "";
         }
         console.log("Its a number");
@@ -85,9 +87,20 @@ var display = function(display_this){
     $("#display").html(display_this);
     console.log(equation_string_array)
 };
-addition_operator = function (){
-    return Number(equation_string_array[0]) + Number(equation_string_array[2]) /*TODO: Change from hardcoded to last two numbers*/
+equals_operator = function (num1, num2, operator) {
+    if(operator == "+"){
+        return addition_operator(num1, num2);
+    }
+    else if(operator == "-"){
+        return subtraction_operator(num1, num2);
+    }
 }
+addition_operator = function (num1, num2){
+    return Number(num1) + Number(num2); /*TODO: Change from hardcoded to last two numbers*/
+};
+subtraction_operator = function(num1, num2){
+    return Number(num1) - Number(num2);
+};
 /* ** Run the js functions */
 $(document).ready(function(){
     $('.buttons button').on('click', function () {
