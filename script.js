@@ -40,6 +40,12 @@ var determine_type = function(button){
         to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
+        if(typeof(solution) == "number"){
+            clear_all_string();
+            index = 0;
+            string_into_array({type: "number", value: solution});
+            clear_all();
+        }
         index++;
         string_into_array(button);
         index++;
@@ -105,6 +111,7 @@ var string_into_array = function(last_input){
             current_string = "";
         }else{ // ** button c was pressed; aka, clear all
             clear_all();
+            clear_all_string()
         }
     }else if(last_input.type == "decimal"){
         var decimal_flag = false; // ** If true, there is already a decimal in the current_string
