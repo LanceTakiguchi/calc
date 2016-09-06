@@ -71,6 +71,8 @@ var handle_type = function(button){
     }else if(button.type == "decimal"){
         console.log("That's a decimal");
         was_last_button_operator = false;
+        string_into_array(button);
+        display(current_string)
     }else if(button.type == "equals"){
         console.log("that's an equals");
         solution = equals_operator( /* ** Call appropriate operator function */
@@ -91,13 +93,32 @@ var string_into_array = function(last_input){
     if(last_input.type == "operator"){
         equation_string_array[index] = last_input.value;
         current_string = "";
-    }else if(last_input.type == "clear"){
-        if(last_input.value == "ce"){
+    }else if(last_input.type == "clear") {
+        if (last_input.value == "ce") {
             equation_string_array.pop();
             current_string = "";
-        }else{
+        } else {
             equation_string_array = [];
             current_string = "";
+        }
+    }else if(last_input.type == "decimal"){
+        var decimal_flag = false; // ** If true, there is already a decimal in the current_string
+        var last_string = equation_string_array[index];
+        for(char in last_string){
+            if(last_string[char] == "."){ /*TODO: Handle this*/
+                decimal_flag = true;
+                break;
+            }
+        }
+        if(!decimal_flag){ // ** If there has been no decimal
+            if(display() == 0){ // ** Check to see if it was last just a 0
+                current_string += 0;
+                current_string += last_input.value;
+                equation_string_array[index] = current_string;
+            }else{
+                current_string += last_input.value;
+                equation_string_array[index] = current_string;
+            }
         }
     }else{ /* **It is a number */
         if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */ /*TODO: Check if this is being used*/
@@ -114,6 +135,7 @@ var display = function(display_this){
     /*console.log(display_this);*//*TODO: delete*/
     $("#display").html(display_this);
     console.log(equation_string_array)
+    return $("#display").text();
 };
 // ** Takes two numbers and an operator's string.
     // It determines what kind of operation to perform
