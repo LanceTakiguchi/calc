@@ -7,11 +7,20 @@ Date: 09/02/2016 Time: 10:42
 Objective: Aid in connect the calculator to the js to create functionality
 Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 */
-var equation_string_array = [];
-var index = 0;
-var current_string = "";
-var was_last_button_operator; /* **Used to reset the current_string */
+// ****** GLOBAL VARIABLES ******
+var equation_string_array = []; // ** The array that holds all the inputs of current use
+var index = 0; // ** index for equation_string_array
+var current_string = ""; // ** Holds the last number inputs or operator
+var was_last_button_operator; /* **Flag to tell if the last input was an operator*/
 var solution; /* **the solution to the last operation */
+/* ** Run the js functions */
+$(document).ready(function(){
+    display(0); // ** Default loaded calculator displays 0.
+    $('.buttons button').on('click', function () {
+        var button_input = $(this);
+        handle_type(determine_type(button_input[0]));
+    });
+});
 //* **Determines what kind of button was pushed */
 var determine_type = function(button){
     if(button.value == "/" || button.value == "x" || button.value == "-" || button.value == "+"){
@@ -27,31 +36,26 @@ var determine_type = function(button){
     }
 };
 //* **The brain that sorts what to do with the last input */
-/** * It is passed an object with type & value of the last button input and then determines what to call according
- * to certain conditions */
+/* ** It is passed an object with type & value of the last button input and then determines what to call according
+        to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
         index++;
         string_into_array(button);
         index++;
         if(button.value == "/"){
-            console.log("That's a divide");
             was_last_button_operator = true;
         }else if(button.value == "x"){
-            console.log("That's a multiply");
             was_last_button_operator = true;
         }else if(button.value == "-"){
-            console.log("That's a subtract");
             was_last_button_operator = true;
         }else{
-            console.log("That's addtion");;
             was_last_button_operator = true;
         }
     }else if(button.type == "clear"){
         if (button.value == "ce"){
-            console.log("That's a clear");
             // **If the last_button was a operator, we do not care to clear the number
-            if(was_last_button_operator){ /*TODO: Change to check number*/
+            if(was_last_button_operator){
                 display(0);
             }else{
                 string_into_array(button);
@@ -61,7 +65,6 @@ var handle_type = function(button){
                                                     // the was_last_button_operator flag is true
             }
         }else{ // ** C was pressed; Clear all.
-            console.log("That's a clear all");
             string_into_array(button);
             was_last_button_operator = false;
             display(0)
@@ -69,12 +72,10 @@ var handle_type = function(button){
             solution = null; // ** Just in case
         }
     }else if(button.type == "decimal"){
-        console.log("That's a decimal");
         was_last_button_operator = false;
         string_into_array(button);
         display(current_string)
     }else if(button.type == "equals"){
-        console.log("that's an equals");
         solution = equals_operator( /* ** Call appropriate operator function */
             equation_string_array[index-2], // **num1
             equation_string_array[index], // **num2
@@ -87,8 +88,9 @@ var handle_type = function(button){
         display(current_string);
         /*TODO: Handle a number input after an equals/result input*/
     }
-}
-/* **string_into_array: 1 parameters object with type, value. if it is a number, add to string, if operator, put into next index */
+};
+/* **string_into_array: 1 parameters object with type, value.
+        if it is a number, add to string, if operator, put into next index */
 var string_into_array = function(last_input){
     if(last_input.type == "operator"){
         equation_string_array[index] = last_input.value;
@@ -97,7 +99,7 @@ var string_into_array = function(last_input){
         if (last_input.value == "ce") {
             equation_string_array.pop();
             current_string = "";
-        } else {
+        }else{ // ** button c was pressed; aka, clear all
             equation_string_array = [];
             current_string = "";
         }
@@ -105,13 +107,13 @@ var string_into_array = function(last_input){
         var decimal_flag = false; // ** If true, there is already a decimal in the current_string
         var last_string = equation_string_array[index];
         for(char in last_string){
-            if(last_string[char] == "."){ /*TODO: Handle this*/
+            if(last_string[char] == "."){ // ** Search to see if there is a decimal already, if so, set the decimal_flag.
                 decimal_flag = true;
                 break;
             }
         }
         if(!decimal_flag){ // ** If there has been no decimal
-            if(display() == 0){ // ** Check to see if it was last just a 0
+            if(display() == 0){ // ** Check to see if it was last just a 0.
                 current_string += 0;
                 current_string += last_input.value;
                 equation_string_array[index] = current_string;
@@ -121,18 +123,12 @@ var string_into_array = function(last_input){
             }
         }
     }else{ /* **It is a number */
-        if(was_last_button_operator){ /* **This whole flag is to reset the current_string if it was last a operator */ /*TODO: Check if this is being used*/
-            was_last_button_operator = false;
-            current_string = "";
-        }
-        console.log("Its a number");
         current_string += last_input.value;
         equation_string_array[index] = current_string;
     }
 };
 /* **display function: shows parameter into the calculator's display. */
 var display = function(display_this){
-    /*console.log(display_this);*//*TODO: delete*/
     $("#display").html(display_this);
     console.log(equation_string_array)
     return $("#display").text();
@@ -153,7 +149,7 @@ var equals_operator = function (num1, num2, operator) {
 };
 // **Passed 2 numbers. The functions adds them and returns the value.
 var addition_operator = function (num1, num2){
-    return Number(num1) + Number(num2); /*TODO: Change from hardcoded to last two numbers*/
+    return Number(num1) + Number(num2);
 };
 // **Passed 2 numbers. The functions subtracts them and returns the value.
 var subtraction_operator = function(num1, num2){
@@ -167,11 +163,3 @@ var multiplication_operator = function(num1, num2){
 var division_operator = function(num1, num2){
     return Number(num1) / Number(num2);
 }
-/* ** Run the js functions */
-$(document).ready(function(){
-    display(0); // ** Default loaded calculator displays 0.
-    $('.buttons button').on('click', function () {
-        var button_input = $(this);
-        handle_type(determine_type(button_input[0]));
-    });
-});
