@@ -12,6 +12,7 @@ var equation_string_array = []; // ** The array that holds all the inputs of cur
 var index = 0; // ** index for equation_string_array
 var current_string = ""; // ** Holds the last number inputs or operator
 var was_last_button_operator = null; /* **Flag to tell if the last input was an operator*/
+var was_last_equals = null; // ** Flag to tell if the last button pressed was an equals
 var solution = null; /* **the solution to the last operation */
 /* ** Run the js functions */
 $(document).ready(function(){
@@ -40,25 +41,39 @@ var determine_type = function(button){
         to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
-        if(typeof(solution) == "number"){
+        if(was_last_equals){  // ** If the last button pressed was an equals
             clear_all_string();
             index = 0;
             string_into_array({type: "number", value: solution});
             clear_all();
         }
+        var maybe_operator = equation_string_array[index - 1]; // ** Should be the last operator value in the array
+        // ** Purpose: Handle num, op, num, op situation
+        if(maybe_operator == "+" || maybe_operator == "-" || maybe_operator == "x" || maybe_operator == "/"){
+            var num1 = null;
+            if(typeof(solution) == "number"){ // ** If there is a solution already in the works
+                num1 = solution;
+            }else{ // ** This is the 2nd operator in the operation
+                num1 = equation_string_array[index-2];
+            }
+            solution = equals_operator( /* ** Call appropriate operator function */
+                num1, // **num1
+                equation_string_array[index], // **num2
+                equation_string_array[index-1]); // **operator
+            display(solution);
+        }
         index++;
         string_into_array(button);
         index++;
+        was_last_button_operator = true;
+        was_last_equals = false;
         if(button.value == "/"){
-            was_last_button_operator = true;
         }else if(button.value == "x"){
-            was_last_button_operator = true;
         }else if(button.value == "-"){
-            was_last_button_operator = true;
-        }else{
-            was_last_button_operator = true;
+        }else{ // ** Addtion
         }
     }else if(button.type == "clear"){
+        was_last_equals = false;
         if (button.value == "ce"){
             // **If the last_button was a operator, we do not care to clear the number
             if(was_last_button_operator){
@@ -78,21 +93,35 @@ var handle_type = function(button){
         }
     }else if(button.type == "decimal"){
         was_last_button_operator = false;
+        was_last_equals = false;
         string_into_array(button);
         display(current_string)
     }else if(button.type == "equals"){
-        solution = equals_operator( /* ** Call appropriate operator function */
-            equation_string_array[index-2], // **num1
-            equation_string_array[index], // **num2
-            equation_string_array[index-1]); // **operator
-        was_last_button_operator = false;
-        display(solution);
+        was_last_equals = true;
+        if (typeof(solution) == "number"){
+            solution = equals_operator( /* ** Call appropriate operator function */
+                solution, // **num1
+                equation_string_array[index], // **num2
+                equation_string_array[index-1]); // **operator
+            was_last_button_operator = false;
+            display(solution);
+        }else{
+            solution = equals_operator( /* ** Call appropriate operator function */
+                equation_string_array[index-2], // **num1
+                equation_string_array[index], // **num2
+                equation_string_array[index-1]); // **operator
+            was_last_button_operator = false;
+            display(solution);
+        }
     }else{ /* If it was a number */
-        if(typeof(solution) == "number"){ // ** If last inputs were number, operator, number, equals, number,
+        if(was_last_equals){ // ** If last inputs were number, operator, number, equals, number,
             // then act like there was a clear pressed first
             clear_all_string();
             clear_all();
-        }
+        }/*else if(typeof(solution) == "number"){
+
+        }*/
+        was_last_equals = false;
         string_into_array(button);
         was_last_button_operator = false;
         display(current_string);
