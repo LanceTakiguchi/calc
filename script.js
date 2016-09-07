@@ -71,7 +71,8 @@ var handle_type = function(button){
         if(maybe_operator == "+" || maybe_operator == "-" || maybe_operator == "x" || maybe_operator == "/"){
             // ** See if more than one operator is being pressed in a row
             if(was_last_button_operator) {
-                string_into_array(button)
+                string_into_array(button);
+                display_log();
                 return; // ** No more need for the operator
             }
             var num1 = null;
@@ -91,6 +92,7 @@ var handle_type = function(button){
         index++;
         was_last_button_operator = true;
         was_last_equals = false;
+        display_log();
         /*if(button.value == "/"){
         }else if(button.value == "x"){
         }else if(button.value == "-"){
@@ -112,6 +114,7 @@ var handle_type = function(button){
         }else{ // ** C was pressed; Clear all.
             string_into_array(button);
             was_last_button_operator = false;
+            clear_display_log();
             display(0)
             index = 0;
         }
@@ -122,6 +125,7 @@ var handle_type = function(button){
         display(current_string)
     }else if(button.type == "equals"){
         //** If inputs were just num equals
+        clear_display_log(); // ** Always clear if button pressed was equals
         if(equation_string_array.length < 2){
             return; // ** ignore the equals input
         }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
@@ -132,6 +136,7 @@ var handle_type = function(button){
             );
             display(solution);
             clear_all_string();
+            clear_display_log(); // ** Any time equals is pressed, this should clear
             return;
         }
         // ** Set equals flag
@@ -155,12 +160,14 @@ var handle_type = function(button){
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
+            clear_display_log();
         }
     }else{ /* If it was a number */
         if(was_last_equals){ // ** If last inputs were number, operator, number, equals, number,
             // then act like there was a clear pressed first
             clear_all_string();
             clear_all();
+            clear_display_log()
         }/*else if(typeof(solution) == "number"){
 
         }*/
@@ -168,7 +175,11 @@ var handle_type = function(button){
         string_into_array(button);
         was_last_button_operator = false;
         display(current_string);
-        /*TODO: Handle a number input after an equals/result input*/
+        if(equation_string_array.length > 1){
+            display_log();
+        }else{
+            clear_display_log();
+        }
     }
 };
 /* **string_into_array: 1 parameters object with type, value.
@@ -226,6 +237,13 @@ var display = function(display_this){
     console.log(equation_string_array)
     return $("#display").text();
 };
+// ** Seperate from function display in the case just the array updates
+var display_log = function(){
+    $("#display_equation_log").html(equation_string_array.join(" ")); // ** display the array seperated by spaces
+}
+var clear_display_log = function(){
+    $("#display_equation_log").html("");
+}
 // ** Takes two numbers and an operator's string.
     // It determines what kind of operation to perform
     // and calls the appropriate operator function and returns the result.
