@@ -44,12 +44,17 @@ var handle_type = function(button){
     if(button.type == "operator"){
         // ** If the previous button pressed was an equals
         if(was_last_equals){
-            if(typeof(solution) == Number){
+            if(typeof(solution) == Number){ // ** Ex: 1+1= op
                 clear_all_string();
                 index = 2;
                 equation_string_array[0] = solution;
                 equation_string_array[1] = button.value;
-                return; // ** End of main if leads operators we are trying to avoid
+                return;
+            }else if(solution == "Error"){ // ** If Ex: 1/0="Error" operator, then just reset completely
+                was_last_equals = null;
+                clear_all_string();
+                clear_all();
+                return;
             }else{
                 clear_all_string();
                 index = 0;
@@ -58,6 +63,7 @@ var handle_type = function(button){
                 clear_all();
             }
         }else if(equation_string_array.length < 1){ // ** To handle premature operations; operators before anything exists
+            display(0);
             return; // ** Do nothing about it
         }
         var maybe_operator = equation_string_array[index - 1]; // ** In [num, op, num] Should be the last operator value in the array
@@ -248,7 +254,11 @@ var multiplication_operator = function(num1, num2){
 }
 // **Passed 2 numbers. The functions divides them and returns the value.
 var division_operator = function(num1, num2){
-    return Number(num1) / Number(num2);
+    if(num2 == 0){ // ** Handle division by zero. Ex: 1/0
+        return "Error";
+    }else{
+        return Number(num1) / Number(num2);
+    }
 }
 var clear_all = function(){
     solution = null;
