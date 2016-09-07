@@ -6,6 +6,7 @@ Date: 09/02/2016 Time: 10:42
 09/05/2016 16:00, 9/6/2016 09:07
 Objective: Aid in connect the calculator to the js to create functionality
 Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
+ https://docs.google.com/spreadsheets/d/1HRpRqdyQrax5vgwrVatcOxSxly6GHXXfZuzc0lb9Tfg/pubhtml#
 */
 // ****** GLOBAL VARIABLES ******
 var equation_string_array = []; // ** The array that holds all the inputs of current use
@@ -47,7 +48,14 @@ var handle_type = function(button){
             string_into_array({type: "number", value: solution});
             clear_all();
         }
-        var maybe_operator = equation_string_array[index - 1]; // ** Should be the last operator value in the array
+        var last_input = equation_string_array[index -1]; /*TODO See if last input was an operator; debugging*/
+        var maybe_operator = equation_string_array[index - 2]; // ** In [num, op, num] Should be the last operator value in the array
+        // ** See if more than one operator is being pressed in a row
+        if(last_input == "+" || last_input == "-" || last_input == "x" || last_input == "/"){
+            string_into_array(button)
+            return; // ** No more need for the operator
+            /*TODO: Check index incremeting*/
+        }
         // ** Purpose: Handle num, op, num, op situation
         if(maybe_operator == "+" || maybe_operator == "-" || maybe_operator == "x" || maybe_operator == "/"){
             var num1 = null;
@@ -132,6 +140,12 @@ var handle_type = function(button){
         if it is a number, add to string, if operator, put into next index */
 var string_into_array = function(last_input){
     if(last_input.type == "operator"){
+        var previous_input = equation_string_array[index -1]; /*TODO See if last input was an operator; debugging*/
+        // ** See if more than one operator is being pressed in a row
+        if(previous_input == "+" || previous_input == "-" || previous_input == "x" || previous_input == "/"){
+            equation_string_array[index -1] = last_input.value;
+            return; // ** No more need for the operator
+        }
         equation_string_array[index] = last_input.value;
         current_string = "";
     }else if(last_input.type == "clear") {
