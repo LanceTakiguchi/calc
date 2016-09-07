@@ -42,17 +42,27 @@ var determine_type = function(button){
         to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
-        if(was_last_equals){  // ** If the last button pressed was an equals
-            clear_all_string();
-            index = 0;
-            string_into_array({type: "number", value: solution});
-            clear_all();
+        // ** If the previous button pressed was an equals
+        if(was_last_equals){
+            if(typeof(solution) == Number){
+                clear_all_string();
+                index = 2;
+                equation_string_array[0] = solution;
+                equation_string_array[1] = button.value;
+                return; // ** End of main if leads operators we are trying to avoid
+            }else{
+                clear_all_string();
+                index = 0;
+                string_into_array({type: "number", value: solution});
+                display(solution);
+                clear_all();
+            }
         }
         var maybe_operator = equation_string_array[index - 1]; // ** In [num, op, num] Should be the last operator value in the array
         // ** Purpose: Handle num, op, num, op situation
         if(maybe_operator == "+" || maybe_operator == "-" || maybe_operator == "x" || maybe_operator == "/"){
             // ** See if more than one operator is being pressed in a row
-            if(was_last_button_operator){
+            if(was_last_button_operator) {
                 string_into_array(button)
                 return; // ** No more need for the operator
             }
@@ -73,11 +83,11 @@ var handle_type = function(button){
         index++;
         was_last_button_operator = true;
         was_last_equals = false;
-        if(button.value == "/"){
+        /*if(button.value == "/"){
         }else if(button.value == "x"){
         }else if(button.value == "-"){
         }else{ // ** Addtion
-        }
+        }*/
     }else if(button.type == "clear"){
         was_last_equals = false;
         if (button.value == "ce"){
@@ -103,8 +113,27 @@ var handle_type = function(button){
         string_into_array(button);
         display(current_string)
     }else if(button.type == "equals"){
+        //** If inputs were just num equals
+        if(equation_string_array.length < 2){
+            return; // ** ignore the equals input
+        }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
+            was_last_equals = true;
+            solution = equals_operator(equation_string_array[0],
+                                        equation_string_array[0],
+                                        equation_string_array[1]
+            );
+            display(solution);
+            clear_all_string();
+            return;
+        }
+        // ** Set equals flag
         was_last_equals = true;
-        if (typeof(solution) == "number"){
+        if(was_last_button_operator){
+            solution = equals_operator(solution, solution, equation_string_array[index-1]);
+            display(solution)
+            clear_all_string()
+        }
+        else if(typeof(solution) == "number"){
             solution = equals_operator( /* ** Call appropriate operator function */
                 solution, // **num1
                 equation_string_array[index], // **num2
