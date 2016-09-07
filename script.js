@@ -48,16 +48,14 @@ var handle_type = function(button){
             string_into_array({type: "number", value: solution});
             clear_all();
         }
-        var last_input = equation_string_array[index -1]; /*TODO See if last input was an operator; debugging*/
-        var maybe_operator = equation_string_array[index - 2]; // ** In [num, op, num] Should be the last operator value in the array
-        // ** See if more than one operator is being pressed in a row
-        if(last_input == "+" || last_input == "-" || last_input == "x" || last_input == "/"){
-            string_into_array(button)
-            return; // ** No more need for the operator
-            /*TODO: Check index incremeting*/
-        }
+        var maybe_operator = equation_string_array[index - 1]; // ** In [num, op, num] Should be the last operator value in the array
         // ** Purpose: Handle num, op, num, op situation
         if(maybe_operator == "+" || maybe_operator == "-" || maybe_operator == "x" || maybe_operator == "/"){
+            // ** See if more than one operator is being pressed in a row
+            if(was_last_button_operator){
+                string_into_array(button)
+                return; // ** No more need for the operator
+            }
             var num1 = null;
             if(typeof(solution) == "number"){ // ** If there is a solution already in the works
                 num1 = solution;
