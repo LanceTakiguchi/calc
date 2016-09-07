@@ -57,6 +57,8 @@ var handle_type = function(button){
                 display(solution);
                 clear_all();
             }
+        }else if(equation_string_array.length < 1){ // ** To handle premature operations; operators before anything exists
+            return; // ** Do nothing about it
         }
         var maybe_operator = equation_string_array[index - 1]; // ** In [num, op, num] Should be the last operator value in the array
         // ** Purpose: Handle num, op, num, op situation
