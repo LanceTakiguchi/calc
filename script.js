@@ -8,6 +8,12 @@ Objective: Aid in connect the calculator to the js to create functionality
 Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
  https://docs.google.com/spreadsheets/d/1HRpRqdyQrax5vgwrVatcOxSxly6GHXXfZuzc0lb9Tfg/pubhtml#
 */
+/*
+ADDTIONAL TESTS:
+1) 1+= ===
+ */
+*/
+ */
 // ****** GLOBAL VARIABLES ******
 var equation_string_array = []; // ** The array that holds all the inputs of current use
 var index = 0; // ** index for equation_string_array
@@ -20,22 +26,25 @@ $(document).ready(function(){
     display(0); // ** Default loaded calculator displays 0.
     $('.buttons button').on('click', function () {
         var button_input = $(this);
-        handle_type(determine_type(button_input[0]));
+        handle_type(determine_type(button_input[0])); // ** Takes the button and determines its type, then moves it to the brain (handle_type)
     });
 });
 //* **Determines what kind of button was pushed */
+// ** passed a button input, returns an object with a type of input and it's value
 var determine_type = function(button){
+    var return_type = null; // ** Will hold the return object's type
     if(button.value == "/" || button.value == "x" || button.value == "-" || button.value == "+"){
-        return {type: "operator", value: button.value}
+        return_type = "operator";
     }else if(button.value == "c" || button.value == "ce"){
-        return {type: "clear", value: button.value}
+        return_type = "clear";
     }else if(button.value == "."){
-        return {type: "decimal", value: button.value}
+        return_type = "decimal";
     }else if(button.value == "="){
-        return {type: "equals", value: button.value}
+        return_type = "equals";
     }else{
-        return {type: "number", value: button.value}
+        return_type = "number";
     }
+    return {type: return_type, value: button.value}
 };
 //* **The brain that sorts what to do with the last input */
 /* ** It is passed an object with type & value of the last button input and then determines what to call according
@@ -44,18 +53,12 @@ var handle_type = function(button){
     if(button.type == "operator"){
         // ** If the previous button pressed was an equals
         if(was_last_equals){
-            if(typeof(solution) == Number){ // ** Ex: 1+1= op
-                clear_all_string();
-                index = 2;
-                equation_string_array[0] = solution;
-                equation_string_array[1] = button.value;
-                return;
-            }else if(solution == "Error"){ // ** If Ex: 1/0="Error" operator, then just reset completely
+            if(solution == "Error"){ // ** If Ex: 1/0="Error" operator, then just reset completely
                 was_last_equals = null;
                 clear_all_string();
                 clear_all();
                 return;
-            }else{
+            }else{ // ** Handle case where, ex: num op num = op
                 clear_all_string();
                 index = 0;
                 string_into_array({type: "number", value: solution});
@@ -63,10 +66,11 @@ var handle_type = function(button){
                 clear_all();
             }
         }else if(equation_string_array.length < 1){ // ** To handle premature operations; operators before anything exists
+            // **ex: ++++++
             display(0);
             return; // ** Do nothing about it
         }
-        var maybe_operator = equation_string_array[index - 1]; // ** In [num, op, num] Should be the last operator value in the array
+        var maybe_operator = equation_string_array[index - 1]; // ** In [num, op, num] w/index =2, should be the last operator value in the array
         // ** Purpose: Handle num, op, num, op situation
         if(maybe_operator == "+" || maybe_operator == "-" || maybe_operator == "x" || maybe_operator == "/"){
             // ** See if more than one operator is being pressed in a row
@@ -129,13 +133,19 @@ var handle_type = function(button){
         if(equation_string_array.length < 2){
             return; // ** ignore the equals input
         }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
+            var first_num = null;
+            if(was_last_equals){
+                first_num = solution;
+            }else{
+                first_num = equation_string_array[0]
+            }
             was_last_equals = true;
-            solution = equals_operator(equation_string_array[0],
+            solution = equals_operator(first_num,
                                         equation_string_array[0],
                                         equation_string_array[1]
             );
             display(solution);
-            clear_all_string();
+            /*clear_all_string();*/
             clear_display_log(); // ** Any time equals is pressed, this should clear
             return;
         }
@@ -144,7 +154,7 @@ var handle_type = function(button){
         if(was_last_button_operator){
             solution = equals_operator(solution, solution, equation_string_array[index-1]);
             display(solution)
-            clear_all_string()
+            /*clear_all_string()*/
         }
         else if(typeof(solution) == "number"){
             solution = equals_operator( /* ** Call appropriate operator function */
@@ -186,7 +196,7 @@ var handle_type = function(button){
         if it is a number, add to string, if operator, put into next index */
 var string_into_array = function(last_input){
     if(last_input.type == "operator"){
-        var previous_input = equation_string_array[index -1]; /*TODO See if last input was an operator; debugging*/
+        var previous_input = equation_string_array[index -1];
         // ** See if more than one operator is being pressed in a row
         if(previous_input == "+" || previous_input == "-" || previous_input == "x" || previous_input == "/"){
             equation_string_array[index -1] = last_input.value;
@@ -234,7 +244,6 @@ var clear_all_string = function(){
 /* **display function: shows parameter into the calculator's display. */
 var display = function(display_this){
     $("#display").html(display_this);
-    console.log(equation_string_array)
     return $("#display").text();
 };
 // ** Seperate from function display in the case just the array updates
