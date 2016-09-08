@@ -97,13 +97,9 @@ var handle_type = function(button){
         was_last_button_operator = true;
         was_last_equals = false;
         display_log();
-        /*if(button.value == "/"){
-        }else if(button.value == "x"){
-        }else if(button.value == "-"){
-        }else{ // ** Addtion
-        }*/
     }else if(button.type == "clear"){
-        was_last_equals = false;
+        was_last_equals = false; // **resetting flag
+        // ** ce clear just the last input
         if (button.value == "ce"){
             // **If the last_button was a operator, we do not care to clear the number
             if(was_last_button_operator){
@@ -123,6 +119,7 @@ var handle_type = function(button){
             index = 0;
         }
     }else if(button.type == "decimal"){
+        // ** Note: multiple decimal inputs are handled in string_into_array
         was_last_button_operator = false;
         was_last_equals = false;
         string_into_array(button);
@@ -135,8 +132,9 @@ var handle_type = function(button){
         }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
             var first_num = null;
             if(was_last_equals){
+                // ** ex: 1 += ===
                 first_num = solution;
-            }else{
+            }else{ // so just ex: 1+=
                 first_num = equation_string_array[0]
             }
             was_last_equals = true;
@@ -153,7 +151,7 @@ var handle_type = function(button){
         was_last_equals = true;
         if(was_last_button_operator){
             solution = equals_operator(solution, solution, equation_string_array[index-1]);
-            display(solution)
+            display(solution);
             /*clear_all_string()*/
         }
         else if(typeof(solution) == "number"){
@@ -177,10 +175,8 @@ var handle_type = function(button){
             // then act like there was a clear pressed first
             clear_all_string();
             clear_all();
-            clear_display_log()
-        }/*else if(typeof(solution) == "number"){
-
-        }*/
+            clear_display_log();
+        }
         was_last_equals = false;
         string_into_array(button);
         was_last_button_operator = false;
@@ -294,6 +290,7 @@ var division_operator = function(num1, num2){
         return Number(num1) / Number(num2);
     }
 }
+// ** Resets global variables
 var clear_all = function(){
     solution = null;
     index = 0;
