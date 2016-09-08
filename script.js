@@ -12,8 +12,6 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 ADDTIONAL TESTS:
 1) 1+= ===
  */
-*/
- */
 // ****** GLOBAL VARIABLES ******
 var equation_string_array = []; // ** The array that holds all the inputs of current use
 var index = 0; // ** index for equation_string_array
