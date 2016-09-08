@@ -16,10 +16,20 @@ header{
     padding-top: 5vh; /* Cover the white showing on top the header */
 }
 header h1{ /* The main header text */
-    font-size: 5.5vmax;
+    font-size: 4vmax;
     text-align: center;
     margin-top: auto;
     color: #C8D7E2; /* mist 50% tint*/
+}
+@media (max-width: 500px) {
+    header h1{ /* The main header text */
+        font-size: 7vmax;
+    }
+}
+@media (min-width: 500px) and (max-width: 1200px) {
+    header h1{ /* The main header text */
+        font-size: 6.5vmax;
+    }
 }
 /* main body */
 #main_body{
@@ -50,13 +60,8 @@ header h1{ /* The main header text */
         text-align: center; /* **Centered buttons nicely */
         border-radius: 25px;
     }
-    #calc_body button{
-        font-size: 5vmax;;
-        font-weight: 700;
-        border-radius: 5px;
-    }
 }
-@media (min-width: 500px) and (max-width: 1000px) {
+@media (min-width: 500px) and (max-width: 1200px) {
     #calc_body{
         background-color: #336B87; /* color: stone */
         height: 66.7vh;
@@ -65,11 +70,6 @@ header h1{ /* The main header text */
         position: relative;
         text-align: center; /* **Centered buttons nicely */
         border-radius: 25px;
-    }
-    #calc_body button{
-        font-size: 5vmax;;
-        font-weight: 700;
-        border-radius: 5px;
     }
 }
 /* Display */
@@ -95,9 +95,20 @@ header h1{ /* The main header text */
 }
 /* Buttons */
 #calc_body button{
-    font-size: 2.5vmax;;
+    font-size: 2.5vmax;
     font-weight: 700;
     border-radius: 5px;
+}
+/* here the rules for small windows */
+@media (max-width: 500px) {
+    #calc_body button {
+        font-size: 4vmax;
+    }
+}
+@media (min-width: 500px) and (max-width: 1200px) {
+    #calc_body button {
+        font-size: 4vmax;
+    }
 }
 #calc_body button:active { /* **The pressed button effect */
     transform: translateY(3px);
