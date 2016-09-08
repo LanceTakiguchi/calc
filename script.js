@@ -239,7 +239,14 @@ var display = function(display_this){
 };
 // ** Seperate from function display in the case just the array updates
 var display_log = function(){
-    $("#display_equation_log").html(equation_string_array.join(" ")); // ** display the array seperated by spaces
+    display_array = equation_string_array.slice(0); // ** Used slice to copy the array
+    for(element in display_array){ // ** Searching through the array
+        if(display_array[element] == "/"){
+            display_array[element] = String.fromCharCode("247"); // ** Replace it with the division symbol
+        }
+    };
+    log_to_display = display_array.join(" "); // ** Add space between each number and operator;
+    $("#display_equation_log").html(log_to_display); // ** display the array seperated by spaces
 }
 var clear_display_log = function(){
     $("#display_equation_log").html("");
