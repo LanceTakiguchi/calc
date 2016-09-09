@@ -20,8 +20,9 @@ var was_last_button_operator = null; /* **Flag to tell if the last input was an 
 var was_last_equals = null; // ** Flag to tell if the last button pressed was an equals
 var solution = null; /* **the solution to the last operation */
 var complete_history = []; // ** Holds all the operations and valid inputs that have occurred since starting the calculator
+var complete_equation_string = ""; //** Holds the every growing string that holds complete history of equations
 /* ** Run the js functions */
-$(document).ready(function(){
+$(document).ready(function() {
     display(0); // ** Default loaded calculator displays 0.
     $('.buttons button').on('click', function () {
         var button_input = $(this);
@@ -104,6 +105,7 @@ var handle_type = function(button){
             if(was_last_button_operator){
                 display(0);
             }else{
+                display_log();
                 string_into_array(button);
                 display(0);
                 was_last_button_operator = true; // **Because we are clearing the last input, which was a number,
@@ -114,7 +116,7 @@ var handle_type = function(button){
             string_into_array(button);
             was_last_button_operator = false;
             clear_display_log();
-            display(0)
+            display(0);
             index = 0;
         }
     }else if(button.type == "decimal"){
@@ -127,7 +129,8 @@ var handle_type = function(button){
         //** If inputs were just num equals
         clear_display_log(); // ** Always clear if button pressed was equals
         if(equation_string_array.length == 1){ //** Ex: 1 =
-            complete_history.push(string_equation() + " = " + string_equation());
+            complete_equation_string = string_equation() + " = " + string_equation()  + "<br />";
+            complete_history_constructor();
             clear_all_string();
             return; // ** ignore the equals input
         }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
@@ -141,7 +144,7 @@ var handle_type = function(button){
                     equation_string_array[1]
                 );
                 // ** Player can look back in the complete history to see what is causing every solution to change
-                complete_history.push("= " + solution);
+                complete_history.push("= " + solution  + "<br />");
             }else{ // so just ex: 1+=
                 first_num = equation_string_array[0];
                 solution = equals_operator(
@@ -149,6 +152,7 @@ var handle_type = function(button){
                     equation_string_array[0],
                     equation_string_array[1]
                 );
+                complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
                 complete_history.push(complete_history_constructor());
             }
             was_last_equals = true;
@@ -166,7 +170,8 @@ var handle_type = function(button){
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
-            complete_history.push(" = " + solution); // ** User could refer to complete history to see what causes changing solution
+            complete_equation_string = " = " + solution + "<br />";
+            complete_history_constructor();
         }else{ // ** A regular use case. Ex: 1 + 2 = 3
             solution = equals_operator( /* ** Call appropriate operator function */
                 equation_string_array[index-2], // **num1
@@ -174,6 +179,7 @@ var handle_type = function(button){
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
+            complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
             complete_history.push(complete_history_constructor());
             clear_display_log();
         }
@@ -269,7 +275,13 @@ var clear_display_log = function(){
 };
 // ** function that puts together and returns the string_equation with the solution
 var complete_history_constructor = function(){
-    return string_equation() + " = " + String(solution);
+    /*complete_equation_string = string_equation() + " = " + String(solution) + "<br />";*/
+    // ** Creates a log to show under the complete history button
+    var $history_a = $("<a>").html(complete_equation_string);
+    var $history_li = $("<li>", {class:"history_log"});
+    $($history_li).append($history_a);
+    $("#history_dropdown_items").append($history_li);
+    return complete_equation_string;
 };
 // ** Takes two numbers and an operator's string.
     // It determines what kind of operation to perform
@@ -310,4 +322,5 @@ var clear_all = function(){
     solution = null;
     index = 0;
     was_last_button_operator = null;
-}
+};
+// TODO: Fix error, just console.log working

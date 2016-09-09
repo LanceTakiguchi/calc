@@ -85,7 +85,6 @@ header h1{ /* The main header text */
     background-color: #C8D7E2; /* mist 50% tint*/
     margin: auto;
     font-size: 250%;
-    /*TODO: Make text show on bottom*/
 }
 #display_equation_log{
     height: 20%;
@@ -94,14 +93,18 @@ header h1{ /* The main header text */
     background-color: #90AFC5; /* mist */
 }
 /* Complete History */
-#history_dropdown{
+.dropdown #history_button{
     font-size: 2.5vmax;
     font-weight: 700;
     border-radius: 5px;
     color: #2A3132; /* shadow */
     background-color: #C8D7E2; /* mist 50% tint*/
     border-color: transparent;
-    margin: 0% 4.2% 4% 4.2%;
+    padding: 0 22.5% 0 23.5%;
+    margin-bottom: 3%;
+}
+.dropdown #history_button:active { /* **The pressed button effect */
+    transform: translateY(0px);
 }
 /* Buttons */
 #calc_body button{
@@ -126,7 +129,7 @@ header h1{ /* The main header text */
 /* Clear Buttons */
 #clear_buttons{
     height: 10.5%;
-    width: 74%;
+    width: 73%;
     position: relative;
     display: inline-block;
 }
