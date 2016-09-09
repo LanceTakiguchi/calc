@@ -1,10 +1,10 @@
 /*
-Project Name: Calculator version 1.0
+Project Name: Calculator version 1.1
 File Name: script.js
 Author: Lance Takiguchi
-Date: 09/02/2016 Time: 10:42
-09/05/2016 16:00, 9/6/2016 09:07
-Objective: Aid in connect the calculator to the js to create functionality
+Date: 09/16/2016 Time: 11:04
+
+Objective: Create a complete history for the calculator
 Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
  https://docs.google.com/spreadsheets/d/1HRpRqdyQrax5vgwrVatcOxSxly6GHXXfZuzc0lb9Tfg/pubhtml#
 */
@@ -19,6 +19,7 @@ var current_string = ""; // ** Holds the last number inputs or operator
 var was_last_button_operator = null; /* **Flag to tell if the last input was an operator*/
 var was_last_equals = null; // ** Flag to tell if the last button pressed was an equals
 var solution = null; /* **the solution to the last operation */
+var complete_history = []; // ** Holds all the operations and valid inputs that have occurred since starting the calculator
 /* ** Run the js functions */
 $(document).ready(function(){
     display(0); // ** Default loaded calculator displays 0.
@@ -125,21 +126,32 @@ var handle_type = function(button){
     }else if(button.type == "equals"){
         //** If inputs were just num equals
         clear_display_log(); // ** Always clear if button pressed was equals
-        if(equation_string_array.length < 2){
+        if(equation_string_array.length == 1){ //** Ex: 1 =
+            complete_history.push(string_equation() + " = " + string_equation());
+            clear_all_string();
             return; // ** ignore the equals input
         }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
             var first_num = null;
             if(was_last_equals){
                 // ** ex: 1 += ===
                 first_num = solution;
+                solution = equals_operator(
+                    first_num,
+                    equation_string_array[0],
+                    equation_string_array[1]
+                );
+                // ** Player can look back in the complete history to see what is causing every solution to change
+                complete_history.push("= " + solution);
             }else{ // so just ex: 1+=
-                first_num = equation_string_array[0]
+                first_num = equation_string_array[0];
+                solution = equals_operator(
+                    first_num,
+                    equation_string_array[0],
+                    equation_string_array[1]
+                );
+                complete_history.push(complete_history_constructor());
             }
             was_last_equals = true;
-            solution = equals_operator(first_num,
-                                        equation_string_array[0],
-                                        equation_string_array[1]
-            );
             display(solution);
             /*clear_all_string();*/
             clear_display_log(); // ** Any time equals is pressed, this should clear
@@ -147,25 +159,22 @@ var handle_type = function(button){
         }
         // ** Set equals flag
         was_last_equals = true;
-        if(was_last_button_operator){
-            solution = equals_operator(solution, solution, equation_string_array[index-1]);
-            display(solution);
-            /*clear_all_string()*/
-        }
-        else if(typeof(solution) == "number"){
+        if(typeof(solution) == "number"){ // ** repeat operations; ex: 1 + 1 = = =
             solution = equals_operator( /* ** Call appropriate operator function */
                 solution, // **num1
                 equation_string_array[index], // **num2
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
-        }else{
+            complete_history.push(" = " + solution); // ** User could refer to complete history to see what causes changing solution
+        }else{ // ** A regular use case. Ex: 1 + 2 = 3
             solution = equals_operator( /* ** Call appropriate operator function */
                 equation_string_array[index-2], // **num1
                 equation_string_array[index], // **num2
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
+            complete_history.push(complete_history_constructor());
             clear_display_log();
         }
     }else{ /* If it was a number */
@@ -240,20 +249,28 @@ var display = function(display_this){
     $("#display").html(display_this);
     return $("#display").text();
 };
-// ** Seperate from function display in the case just the array updates
-var display_log = function(){
-    display_array = equation_string_array.slice(0); // ** Used slice to copy the array
+// ** Used in the display_log & complete history builder to change the equation_string_array into a string
+var string_equation = function(){
+    var display_array = equation_string_array.slice(0); // ** Used slice to copy the array
     for(element in display_array){ // ** Searching through the array
         if(display_array[element] == "/"){
             display_array[element] = String.fromCharCode("247"); // ** Replace it with the division symbol
         }
-    };
-    log_to_display = display_array.join(" "); // ** Add space between each number and operator;
+    }
+    return display_array.join(" "); // ** Add space between each number and operator;
+};
+// ** Seperate from function display in the case just the array updates
+var display_log = function(){
+    var log_to_display = string_equation();
     $("#display_equation_log").html(log_to_display); // ** display the array seperated by spaces
-}
+};
 var clear_display_log = function(){
     $("#display_equation_log").html("");
-}
+};
+// ** function that puts together and returns the string_equation with the solution
+var complete_history_constructor = function(){
+    return string_equation() + " = " + String(solution);
+};
 // ** Takes two numbers and an operator's string.
     // It determines what kind of operation to perform
     // and calls the appropriate operator function and returns the result.
