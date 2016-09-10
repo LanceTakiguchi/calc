@@ -104,9 +104,12 @@ var handle_type = function(button){
             // **If the last_button was a operator, we do not care to clear the number
             if(was_last_button_operator){
                 display(0);
-            }else{
+                equation_string_array.splice(index - 1, 1);
+                index-=2;
                 display_log();
+            }else{
                 string_into_array(button);
+                display_log();
                 display(0);
                 was_last_button_operator = true; // **Because we are clearing the last input, which was a number,
                                                     // the array's last input is now an operator, therefore,
@@ -191,14 +194,14 @@ var handle_type = function(button){
             clear_display_log();
         }
         was_last_equals = false;
-        string_into_array(button);
-        was_last_button_operator = false;
-        display(current_string);
         if(equation_string_array.length > 1){
             display_log();
         }else{
             clear_display_log();
         }
+        string_into_array(button);
+        was_last_button_operator = false;
+        display(current_string);
     }
 };
 /* **string_into_array: 1 parameters object with type, value.
