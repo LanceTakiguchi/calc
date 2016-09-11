@@ -134,7 +134,7 @@ var handle_type = function(button){
         if(equation_string_array.length == 1){ //** Ex: 1 =
             complete_equation_string = string_equation() + " = " + string_equation()  + "<br />";
             complete_history_constructor();
-            clear_all_string();
+            clear_all_string(); // ** ex: 2 = >> pressing another number like 8 now clears the solution 2 from the display
             return; // ** ignore the equals input
         }else if(equation_string_array.length == 2){ // ** If it is a num op equals. Ex: 1+= -> 2
             var first_num = null;
@@ -166,7 +166,12 @@ var handle_type = function(button){
         }
         // ** Set equals flag
         was_last_equals = true;
-        if(typeof(solution) == "number"){ // ** repeat operations; ex: 1 + 1 = = =
+        if(was_last_button_operator){ // ** ex. 1 + 1 + =
+            solution = equals_operator(solution, solution, equation_string_array[index-1]);
+            display(solution);
+            complete_equation_string = string_equation() + " = " + solution + "<br />";
+            complete_history_constructor();
+        }else if(typeof(solution) == "number"){ // ** repeat operations; ex: 1 + 1 = = =
             solution = equals_operator( /* ** Call appropriate operator function */
                 solution, // **num1
                 equation_string_array[index], // **num2
