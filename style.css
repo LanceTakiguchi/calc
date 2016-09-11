@@ -84,7 +84,7 @@ header h1{ /* The main header text */
     width: 90%;
     background-color: #C8D7E2; /* mist 50% tint*/
     margin: auto;
-    font-size: 250%;
+    font-size: 220%;
 }
 #display_equation_log{
     height: 20%;
@@ -93,8 +93,13 @@ header h1{ /* The main header text */
     background-color: #90AFC5; /* mist */
 }
 /* Complete History */
+.dropdown{
+    height: 10%;
+}
 .dropdown #history_button{
-    font-size: 2.5vmax;
+    height: 80%;
+    width: 80%;
+    font-size: 2vmax;
     font-weight: 700;
     border-radius: 5px;
     color: #2A3132; /* shadow */
@@ -128,7 +133,7 @@ header h1{ /* The main header text */
 }
 /* Clear Buttons */
 #clear_buttons{
-    height: 10.5%;
+    height: 10%;
     width: 73%;
     position: relative;
     display: inline-block;
@@ -145,7 +150,7 @@ header h1{ /* The main header text */
 }
 /* Operator_buttons */
 #operator_buttons{
-    height: 75%;
+    height: 70%;
     width: 24%;
     position: relative;
     float: right;
@@ -165,7 +170,7 @@ header h1{ /* The main header text */
 }
 /* Numbers, decimal, equals buttons */
 #num_decimal_equals_button{
-    height: 60%;
+    height: 55%;
     width: 75%;
     position: relative;
     margin-top: 1%;
