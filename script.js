@@ -173,21 +173,25 @@ var handle_type = function(button){
             return;
         }
         // ** Set equals flag
-        was_last_equals = true;
         if(was_last_button_operator){ // ** ex. 1 + 1 + =
             solution = equals_operator(solution, solution, equation_string_array[index-1]);
             display(solution);
             complete_equation_string = string_equation() + " = " + solution + "<br />";
             complete_history_constructor();
-        }else if(typeof(solution) == "number"){ // ** repeat operations; ex: 1 + 1 = = =
+        }else if(typeof(solution) == "number"){ // ** repeat operations; ex: 1 + 1 = = =. Also ex: 1 + 2 + 3 =
             solution = equals_operator( /* ** Call appropriate operator function */
                 solution, // **num1
                 equation_string_array[index], // **num2
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
-            complete_equation_string = string_equation() + " = " + solution + "<br />";
-            complete_history_constructor();
+            if (was_last_equals){
+                complete_equation_string = " = " + solution + "<br />";
+                complete_history_constructor();
+            }else{
+                complete_equation_string = string_equation() + " = " + solution + "<br />";
+                complete_history_constructor();
+            }
         }else{ // ** A regular use case. Ex: 1 + 2 = 3
             solution = equals_operator( /* ** Call appropriate operator function */
                 equation_string_array[index-2], // **num1
@@ -197,8 +201,10 @@ var handle_type = function(button){
             display(solution);
             complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
             complete_history.push(complete_history_constructor());
+            /*clear_all_string(); // ** ex: 1 + 1 = = = so that the equation array clears*/
             clear_display_log();
         }
+        was_last_equals = true;
     }else{ /* If it was a number */
         if(was_last_equals){ // ** If last inputs were number, operator, number, equals, number,
             // then act like there was a clear pressed first
