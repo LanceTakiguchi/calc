@@ -186,7 +186,7 @@ var handle_type = function(button){
                 equation_string_array[index-1]); // **operator
             was_last_button_operator = false;
             display(solution);
-            complete_equation_string = " = " + solution + "<br />";
+            complete_equation_string = string_equation() + " = " + solution + "<br />";
             complete_history_constructor();
         }else{ // ** A regular use case. Ex: 1 + 2 = 3
             solution = equals_operator( /* ** Call appropriate operator function */
