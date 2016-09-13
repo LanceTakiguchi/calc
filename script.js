@@ -135,11 +135,13 @@ var handle_type = function(button){
         was_last_ce = false;
         string_into_array(button);
         display(current_string)
-    }else if(button.type == "equals"){
+    }else if(button.type == "equals") {
         //** If inputs were just num equals
         clear_display_log(); // ** Always clear if button pressed was equals
         was_last_ce = false;
-        if(equation_string_array.length == 1){ //** Ex: 1 =
+        if(equation_string_array.length == 0){ // ** if they are just pressing = by its self, no solution, no input before it
+            return; // ** Just do nothing about it
+        }else if(equation_string_array.length == 1){ //** Ex: 1 =
             complete_equation_string = string_equation() + " = " + string_equation()  + "<br />";
             complete_history_constructor();
             clear_all_string(); // ** ex: 2 = >> pressing another number like 8 now clears the solution 2 from the display
