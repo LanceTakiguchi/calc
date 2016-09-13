@@ -12,6 +12,8 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 ADDTIONAL TESTS:
 1) 1+= ===
  */
+// TODO: Fix 1/0= ===; fix the equals after the error output
+// TODO: Fix where the Complete History displays
 // ****** GLOBAL VARIABLES ******
 var equation_string_array = []; // ** The array that holds all the inputs of current use
 var index = 0; // ** index for equation_string_array
@@ -172,7 +174,6 @@ var handle_type = function(button){
             clear_display_log(); // ** Any time equals is pressed, this should clear
             return;
         }
-        // ** Set equals flag
         if(was_last_button_operator){ // ** ex. 1 + 1 + =
             solution = equals_operator(solution, solution, equation_string_array[index-1]);
             display(solution);
@@ -192,6 +193,11 @@ var handle_type = function(button){
                 complete_equation_string = string_equation() + " = " + solution + "<br />";
                 complete_history_constructor();
             }
+        }else if(solution == "Error"){ // When ex: 1/0= =====
+            // clear_all(); // Problem: clearing solution means a 3rd equals post 1/0 will not run here but will
+                                // Go to the else right under and give undefined
+            clear_all_string();
+            clear_display_log();
         }else{ // ** A regular use case. Ex: 1 + 2 = 3
             solution = equals_operator( /* ** Call appropriate operator function */
                 equation_string_array[index-2], // **num1
