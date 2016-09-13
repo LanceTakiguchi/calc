@@ -20,7 +20,6 @@ var was_last_button_operator = null; /* **Flag to tell if the last input was an 
 var was_last_equals = null; // ** Flag to tell if the last button pressed was an equals
 var was_last_ce = false; //** Flag to tell if there was multiple ce button presses in a row
 var solution = null; /* **the solution to the last operation */
-var complete_history = []; // ** Holds all the operations and valid inputs that have occurred since starting the calculator
 var complete_equation_string = ""; //** Holds the every growing string that holds complete history of equations
 /* ** Run the js functions */
 $(document).ready(function() {
@@ -156,7 +155,7 @@ var handle_type = function(button){
                 );
                 // ** Player can look back in the complete history to see what is causing every solution to change
                 complete_equation_string = " = " + solution  + "<br />";
-                complete_history.push(complete_history_constructor());
+                complete_history_constructor();
             }else{ // so just ex: 1+=
                 first_num = equation_string_array[0];
                 solution = equals_operator(
@@ -165,7 +164,7 @@ var handle_type = function(button){
                     equation_string_array[1]
                 );
                 complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
-                complete_history.push(complete_history_constructor());
+                complete_history_constructor();
             }
             was_last_equals = true;
             display(solution);
@@ -201,7 +200,7 @@ var handle_type = function(button){
             was_last_button_operator = false;
             display(solution);
             complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
-            complete_history.push(complete_history_constructor());
+            complete_history_constructor();
             /*clear_all_string(); // ** ex: 1 + 1 = = = so that the equation array clears*/
             clear_display_log();
         }
@@ -304,7 +303,8 @@ var complete_history_constructor = function(){
     var $history_a = $("<a>").html(complete_equation_string);
     var $history_li = $("<li>", {class:"history_log"});
     $($history_li).append($history_a);
-    $("#history_dropdown_items").append($history_li);
+    /*$("#history_dropdown_items").append($history_li);*/
+    $("#history_dropdown_items").prepend($history_li);
     return complete_equation_string;
 };
 // ** Takes two numbers and an operator's string.
@@ -332,7 +332,7 @@ var subtraction_operator = function(num1, num2){
 // **Passed 2 numbers. The functions multiplies them and returns the value.
 var multiplication_operator = function(num1, num2){
     return Number(num1) * Number(num2);
-}
+};
 // **Passed 2 numbers. The functions divides them and returns the value.
 var division_operator = function(num1, num2){
     if(num2 == 0){ // ** Handle division by zero. Ex: 1/0
@@ -340,7 +340,7 @@ var division_operator = function(num1, num2){
     }else{
         return Number(num1) / Number(num2);
     }
-}
+};
 // ** Resets global variables
 var clear_all = function(){
     solution = null;
