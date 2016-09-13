@@ -99,7 +99,7 @@ header h1{ /* The main header text */
 .dropdown #history_button{
     height: 80%;
     width: 80%;
-    font-size: 2vmax;
+    font-size: 1vmax;
     font-weight: 700;
     border-radius: 5px;
     color: #2A3132; /* shadow */
@@ -107,6 +107,11 @@ header h1{ /* The main header text */
     border-color: transparent;
     padding: 0 22.5% 0 23.5%;
     margin-bottom: 3%;
+}
+@media (max-width: 1200px) {
+    .dropdown #history_button{
+        font-size: 2vmax;
+    }
 }
 .dropdown #history_button:active { /* **The pressed button effect */
     transform: translateY(0px);

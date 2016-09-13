@@ -18,6 +18,7 @@ var index = 0; // ** index for equation_string_array
 var current_string = ""; // ** Holds the last number inputs or operator
 var was_last_button_operator = null; /* **Flag to tell if the last input was an operator*/
 var was_last_equals = null; // ** Flag to tell if the last button pressed was an equals
+var was_last_ce = false; //** Flag to tell if there was multiple ce button presses in a row
 var solution = null; /* **the solution to the last operation */
 var complete_history = []; // ** Holds all the operations and valid inputs that have occurred since starting the calculator
 var complete_equation_string = ""; //** Holds the every growing string that holds complete history of equations
@@ -51,6 +52,7 @@ var determine_type = function(button){
         to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
+        was_last_ce = false;
         // ** If the previous button pressed was an equals
         if(was_last_equals){
             if(solution == "Error"){ // ** If Ex: 1/0="Error" operator, then just reset completely
@@ -102,7 +104,9 @@ var handle_type = function(button){
         // ** ce clear just the last input
         if (button.value == "ce"){
             // **If the last_button was a operator, we do not care to clear the number
-            if(was_last_button_operator){
+            if (was_last_ce){ // ** If the last button pressed was a CE, ignore the input
+                return; // ** Do nothing
+            } else if(was_last_button_operator){
                 display(0);
                 equation_string_array.splice(index - 1, 1);
                 index-=2;
@@ -115,7 +119,9 @@ var handle_type = function(button){
                                                     // the array's last input is now an operator, therefore,
                                                     // the was_last_button_operator flag is true
             }
+            was_last_ce = true;
         }else{ // ** C was pressed; Clear all.
+            was_last_ce = false;
             string_into_array(button);
             was_last_button_operator = false;
             clear_display_log();
@@ -126,11 +132,13 @@ var handle_type = function(button){
         // ** Note: multiple decimal inputs are handled in string_into_array
         was_last_button_operator = false;
         was_last_equals = false;
+        was_last_ce = false;
         string_into_array(button);
         display(current_string)
     }else if(button.type == "equals"){
         //** If inputs were just num equals
         clear_display_log(); // ** Always clear if button pressed was equals
+        was_last_ce = false;
         if(equation_string_array.length == 1){ //** Ex: 1 =
             complete_equation_string = string_equation() + " = " + string_equation()  + "<br />";
             complete_history_constructor();
@@ -206,6 +214,7 @@ var handle_type = function(button){
         }
         string_into_array(button);
         was_last_button_operator = false;
+        was_last_ce = false;
         display(current_string);
     }
 };
@@ -331,4 +340,3 @@ var clear_all = function(){
     index = 0;
     was_last_button_operator = null;
 };
-// TODO: Fix error, just console.log working
