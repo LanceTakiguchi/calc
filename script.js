@@ -12,7 +12,6 @@ Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
 ADDTIONAL TESTS:
 1) 1+= ===
  */
-// TODO: Fix 1/0= ===; fix the equals after the error output
 // TODO: Fix where the Complete History displays
 // ****** GLOBAL VARIABLES ******
 var equation_string_array = []; // ** The array that holds all the inputs of current use
@@ -307,7 +306,7 @@ var complete_history_constructor = function(){
     /*complete_equation_string = string_equation() + " = " + String(solution) + "<br />";*/
     // ** Creates a log to show under the complete history button
     var $history_a = $("<a>").html(complete_equation_string);
-    var $history_li = $("<li>", {class:"history_log"});
+    var $history_li = $("<li>", {class:"dropdown"});
     $($history_li).append($history_a);
     /*$("#history_dropdown_items").append($history_li);*/
     $("#history_dropdown_items").prepend($history_li);
