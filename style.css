@@ -116,6 +116,14 @@ header h1{ /* The main header text */
 .dropdown #history_button:active { /* **The pressed button effect */
     transform: translateY(0px);
 }
+#calc_body .dropdown-menu{ /* ** Set  the Complete History drop down placement */
+    left: 34%;
+}
+@media (max-width: 500px) {
+    #calc_body .dropdown-menu{ /* ** Set  the Complete History drop down placement */
+        left: 26%;
+    }
+}
 /* Buttons */
 #calc_body button{
     font-size: 2.5vmax;
