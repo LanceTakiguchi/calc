@@ -155,7 +155,8 @@ var handle_type = function(button){
                     equation_string_array[1]
                 );
                 // ** Player can look back in the complete history to see what is causing every solution to change
-                complete_history.push("= " + solution  + "<br />");
+                complete_equation_string = " = " + solution  + "<br />";
+                complete_history.push(complete_history_constructor());
             }else{ // so just ex: 1+=
                 first_num = equation_string_array[0];
                 solution = equals_operator(
