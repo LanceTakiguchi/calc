@@ -1,5 +1,5 @@
 # Calculator
 
-## Version pv0.5
+## Version pv1.0
 #### Description
-Fix the calculator; Put it back in working functionality
+Change the UI
