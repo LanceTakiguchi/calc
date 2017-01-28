@@ -5,10 +5,7 @@
 	#calc_body{
 		height: 66.7vh;
 		width: 90vw;
-		margin: 8.3vh auto;
-		position: relative;
-		text-align: center; /* **Centered buttons nicely */
-		border-radius: 25px;
+		margin: 4vh auto;
 	}
 	#calc_body .dropdown-menu{ /* ** Set  the Complete History drop down placement */
 		left: 26%;
@@ -30,9 +27,6 @@
         #calc_body{
         	height: 66.7vh;
         	width: 80vw;
-        	margin: 8.3vh auto;
-        	position: relative;
-        	text-align: center; /* **Centered buttons nicely */
-        	border-radius: 25px;
+        	margin: 4vh auto;
         }
     }

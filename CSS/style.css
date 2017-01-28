@@ -40,7 +40,7 @@ html, .root {
     height: 66.7vh;
     width: 40vw;
     max-width: 500px; /* **So that it doesn't look fat in a wide screen*/
-    margin: 8vh auto;
+    margin: 4vh auto;
     position: relative;
     text-align: center; /* **Centered buttons nicely */
     border-radius: 25px;
@@ -71,7 +71,7 @@ html, .root {
 }
 .dropdown #history_button {
     height: 80%;
-    width: 80%;
+    width: 90%;
     font-size: 1.625em;
     font-weight: 700;
     border-radius: 5px;
@@ -150,4 +150,20 @@ html, .root {
     border-color: transparent;
     background-color: #B4C7E6; /* Blue Tint 2 */
     margin: 1%; /** *Space between the buttons*/
+}
+#footer div p a{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.625em;
+    color: #ADE4DB; /* Mint Tint 2*/
+}
+#footer div p {
+    display: inline-block;
+    margin: auto;
+}
+#footer div {
+    text-align: center;
+}
+
+#footer #my_website {
+    font-family: 'Architects Daughter', cursive;
 }
