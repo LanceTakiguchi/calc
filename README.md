@@ -1,5 +1,14 @@
-# Calculator
+# calculator
+* Date: 
+* Author: Lance Takiguchi
+* Description: My website to showcase my Web Development skills and applications
 
 ## Version pv1.0
-#### Description
-Change the UI
+* Date: 
+* Description: Change the UI
+
+## Web Development Utilized 
+* HTML
+* CSS
+* JavaScript
+* jQuery
