@@ -1,0 +1,38 @@
+@media (max-width: 500px) {
+	#main_heading { 
+		font-size: 4.25em;
+	}
+	#calc_body{
+		height: 66.7vh;
+		width: 90vw;
+		margin: 8.3vh auto;
+		position: relative;
+		text-align: center; /* **Centered buttons nicely */
+		border-radius: 25px;
+	}
+	#calc_body .dropdown-menu{ /* ** Set  the Complete History drop down placement */
+		left: 26%;
+	}
+	.dropdown #history_button {
+		font-size: 1em;
+	}
+	#calc_body button {
+    font-size: 1.625em;
+}
+}
+@media (min-width: 500px) and (max-width: 1200px) {
+		/*    #main_heading { 
+        font-size: 4.25em;
+        }*/
+        .dropdown #history_button{
+        	font-size: 1.625em;
+        }
+        #calc_body{
+        	height: 66.7vh;
+        	width: 80vw;
+        	margin: 8.3vh auto;
+        	position: relative;
+        	text-align: center; /* **Centered buttons nicely */
+        	border-radius: 25px;
+        }
+    }

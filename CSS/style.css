@@ -1,0 +1,153 @@
+/*
+Color Scheme
+http://paletton.com/#uid=53O0u0khwx77BREcRH-lwsrq8oG
+Base: 5677AC 3 Adjacent Colors
+ 
+Base Blue: 5677AC
+Blue Tint 2: B4C7E6;
+Blue Tint 1: 809DCB
+Blue Shades 1: 3A5E96;
+Blue Shades 2: 214783;
+Mint: 4AA596;
+Mint Tint 2: ADE4DB;
+Mint Shade 2: 167D6C
+Purple Shade 1: 50409D
+Purple Tint 2: BFB7E8
+*/ 
+html, .root {
+  font-size: 24px;
+  line-height: 31px;
+}
+/* Header */
+#main_heading { /* The main header text */
+    font-family: 'Architects Daughter', cursive;
+    font-size: 6.83333333em;
+    text-align: center;
+    margin-top: 4vh;
+    margin-bottom: 0;
+    color: #ADE4DB; /* Mint Tint 2*/
+}
+/* main body */
+#main_body{
+    background-color: #167D6C; /* color: Mint Shade 2 */
+    height: 100vh; /* 5/6 of total height */
+    width: 100vw;
+    position: absolute;
+}
+/* Calculator */
+#calc_body {
+    background-color: #5677AC; /* color: Base Blue */
+    height: 66.7vh;
+    width: 40vw;
+    max-width: 500px; /* **So that it doesn't look fat in a wide screen*/
+    margin: 8vh auto;
+    position: relative;
+    text-align: center; /* **Centered buttons nicely */
+    border-radius: 25px;
+}
+/* Display */
+#display_section{
+    height: 20%;
+    width: 100%;
+    position: relative;
+    padding-top: 5%; /** *Creates calculator's top spacing/margin */
+}
+#display{
+    height: 60%;
+    width: 90%;
+    background-color: #B4C7E6; /* Blue Tint 2 */
+    margin: auto;
+    font-size: 220%;
+}
+#display_equation_log{
+    height: 20%;
+    width: 90%;
+    margin: auto;
+    background-color: #809DCB; /* Blue Tint  1 */
+}
+/* Complete History */
+.dropdown{
+    height: 10%;
+}
+.dropdown #history_button {
+    height: 80%;
+    width: 80%;
+    font-size: 1.625em;
+    font-weight: 700;
+    border-radius: 5px;
+    color: #2A3132; /* shadow */
+    background-color: #B4C7E6; /* Blue Tint 2 */
+    border-color: transparent;
+    padding: 0 22.5% 0 23.5%;
+    margin-bottom: 3%;
+}
+.dropdown #history_button:active { /* **The pressed button effect */
+    transform: translateY(0px);
+}
+#calc_body .dropdown-menu{ /* ** Set  the Complete History drop down placement */
+    left: 34%;
+    background-color: #C8D7E2;
+}
+/* Buttons */
+#calc_body button{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.625em;
+    font-weight: 700;
+    border-radius: 5px;
+}
+#calc_body button:active { /* **The pressed button effect */
+    transform: translateY(3px);
+}
+/* Clear Buttons */
+#clear_buttons{
+    height: 10%;
+    width: 73%;
+    position: relative;
+    display: inline-block;
+}
+#clear_buttons button{
+    height: 90%;
+    width: 43%;
+    background-color: #3A5E96; /* Blue Shades
+    1 */
+    color: #B4C7E6; /* Blue Tint 2*/
+    border-color: transparent;
+}
+#clear_buttons #last_clear{
+    margin-left: 3%; /** *Creates space between the clear buttons */
+}
+/* Operator_buttons */
+#operator_buttons{
+    height: 70%;
+    width: 24%;
+    position: relative;
+    float: right;
+    /*clear: left;*/ /* To clear the clear_buttons */
+    display: inline-block;
+}
+#operator_buttons button{
+    height: 17.5%;
+    width: 85%;
+    margin: 2% 20% 2% 0; /** *Creates space between the buttons and calculator */
+    background-color: #50409D; /* Purple Shade 1 */
+    color: #BFB7E8; /* Purple Tint 2 */
+    border-color: transparent;
+}
+#operator_buttons #addition_symbol{
+    height: 35%; /* **Too make it bigger than the rest of the operator buttons */
+}
+/* Numbers, decimal, equals buttons */
+#num_decimal_equals_button{
+    height: 55%;
+    width: 75%;
+    position: relative;
+    margin-top: 1%;
+}
+#num_decimal_equals_button button{
+    height: 22%;
+    width: 27%;
+    color: #2A3132; /* shadow */
+    border-color: transparent;
+    background-color: #B4C7E6; /* Blue Tint 2 */
+    margin: 1%; /** *Space between the buttons*/
+}
