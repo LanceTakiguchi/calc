@@ -127,7 +127,7 @@ html, .root {
 }
 #operator_buttons button{
     height: 17.5%;
-    width: 85%;
+    width: 79%;
     margin: 2% 20% 2% 0; /** *Creates space between the buttons and calculator */
     background-color: #50409D; /* Purple Shade 1 */
     color: #BFB7E8; /* Purple Tint 2 */
@@ -158,12 +158,11 @@ html, .root {
 }
 #footer div p {
     display: inline-block;
-    margin: auto;
+    margin: 0 0.5em 0 0.5em;
 }
 #footer div {
     text-align: center;
 }
-
 #footer #my_website {
     font-family: 'Architects Daughter', cursive;
 }
