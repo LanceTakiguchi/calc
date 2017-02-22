@@ -1,18 +1,3 @@
-/*
-Project Name: Calculator version 1.1
-File Name: script.js
-Author: Lance Takiguchi
-Date: 09/16/2016 Time: 11:04
-
-Objective: Create a complete history for the calculator
-Prompt: https://github.com/Learning-Fuze/calculator/tree/v1#getting-started
- https://docs.google.com/spreadsheets/d/1HRpRqdyQrax5vgwrVatcOxSxly6GHXXfZuzc0lb9Tfg/pubhtml#
-*/
-/*
-ADDTIONAL TESTS:
-1) 1+= ===
- */
-// TODO: Fix where the Complete History displays
 // ****** GLOBAL VARIABLES ******
 var equation_string_array = []; // ** The array that holds all the inputs of current use
 var index = 0; // ** index for equation_string_array

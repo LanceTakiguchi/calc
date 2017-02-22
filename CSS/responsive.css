@@ -14,19 +14,16 @@
 		font-size: 1em;
 	}
 	#calc_body button {
-    font-size: 1.625em;
-}
+		font-size: 1.625em;
+	}
 }
 @media (min-width: 500px) and (max-width: 1200px) {
-		/*    #main_heading { 
-        font-size: 4.25em;
-        }*/
-        .dropdown #history_button{
-        	font-size: 1.625em;
-        }
-        #calc_body{
-        	height: 66.7vh;
-        	width: 80vw;
-        	margin: 4vh auto;
-        }
-    }
+	.dropdown #history_button{
+		font-size: 1.625em;
+	}
+	#calc_body{
+		height: 66.7vh;
+		width: 80vw;
+		margin: 4vh auto;
+	}
+}
