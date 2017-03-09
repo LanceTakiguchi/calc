@@ -77,7 +77,8 @@ html body {
     background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); /* 053 Soft Grass */
     margin: auto;
     font-size: 220%;
-    color: 28303d;
+    color: #28303d;
+    line-height: 150%; /* Height of numbers displayed */
 }
 #display_equation_log{
     height: 20%;
@@ -93,6 +94,7 @@ html body {
     width: 90%;
     font-size: 1.625em;
     font-weight: 700;
+    line-height: 0;
     border-radius: 5px;
     border-color: transparent;
     padding: 0 22.5% 0 23.5%;
@@ -116,6 +118,9 @@ html body {
     background-color: #C8D7E2;
 }
 /* Buttons */
+body button {
+    line-height: 0;
+}
 #calc_body button{
     font-family: 'Roboto', sans-serif;
     font-size: 2.625em;
