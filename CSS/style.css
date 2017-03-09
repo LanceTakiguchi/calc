@@ -28,6 +28,9 @@ html, .root {
     color: #ADE4DB; /* Mint Tint 2*/
 }
 /* main body */
+html body {
+    background-color: #167D6C; /* color: Mint Shade 2 */
+}
 #main_body{
     background-color: #167D6C; /* color: Mint Shade 2 */
     height: 100vh; /* 5/6 of total height */
