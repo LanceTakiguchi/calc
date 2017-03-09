@@ -1,5 +1,10 @@
 /*
 Color Scheme
+
+https://webgradients.com/?ref=sidebar
+054 Grown Early (Background)
+053 Soft Grass (Screen)
+
 http://paletton.com/#uid=53O0u0khwx77BREcRH-lwsrq8oG
 Base: 5677AC 3 Adjacent Colors
  
@@ -18,6 +23,15 @@ html, .root {
   font-size: 24px;
   line-height: 31px;
 }
+/* Color Combos */
+button.steel {
+    background-color: #596a84;
+    color: #B4C7E6;
+}
+div.steel {
+    background-color: #596a84;
+    color: #B4C7E6;
+}
 /* Header */
 #main_heading { /* The main header text */
     font-family: 'Architects Daughter', cursive;
@@ -29,17 +43,18 @@ html, .root {
 }
 /* main body */
 html body {
-    background-color: #167D6C; /* color: Mint Shade 2 */
+    background-color: #0ba360;
 }
 #main_body{
-    background-color: #167D6C; /* color: Mint Shade 2 */
     height: 100vh; /* 5/6 of total height */
     width: 100vw;
     position: absolute;
+    background-color: #0ba360;
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%); /* 054 Grown Early */
 }
 /* Calculator */
 #calc_body {
-    background-color: #5677AC; /* color: Base Blue */
+    background-color: #28303d; 
     height: 66.7vh;
     width: 40vw;
     max-width: 500px; /* **So that it doesn't look fat in a wide screen*/
@@ -58,15 +73,16 @@ html body {
 #display{
     height: 60%;
     width: 90%;
-    background-color: #B4C7E6; /* Blue Tint 2 */
+    background-color: #c1dfc4;
+    background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); /* 053 Soft Grass */
     margin: auto;
     font-size: 220%;
+    color: 28303d;
 }
 #display_equation_log{
     height: 20%;
     width: 90%;
     margin: auto;
-    background-color: #809DCB; /* Blue Tint  1 */
 }
 /* Complete History */
 .dropdown{
@@ -78,14 +94,22 @@ html body {
     font-size: 1.625em;
     font-weight: 700;
     border-radius: 5px;
-    color: #2A3132; /* shadow */
-    background-color: #B4C7E6; /* Blue Tint 2 */
     border-color: transparent;
     padding: 0 22.5% 0 23.5%;
     margin-bottom: 3%;
 }
-.dropdown #history_button:active { /* **The pressed button effect */
+.dropdown #history_button:active { /* **The pressed button effect */ /* Keep same a steel color scheme. Bootstrap issue */
     transform: translateY(0px);
+    background-color: #596a84;
+    color: #B4C7E6;
+}
+.dropdown #history_button:hover { /* Keep same a steel color scheme. Bootstrap issue */
+    background-color: #596a84;
+    color: #B4C7E6;
+}
+.dropdown #history_button:focus { /* Keep same a steel color scheme. Bootstrap issue */
+    background-color: #596a84;
+    color: #B4C7E6;
 }
 #calc_body .dropdown-menu{ /* ** Set  the Complete History drop down placement */
     left: 34%;
@@ -149,9 +173,7 @@ html body {
 #num_decimal_equals_button button{
     height: 22%;
     width: 27%;
-    color: #2A3132; /* shadow */
     border-color: transparent;
-    background-color: #B4C7E6; /* Blue Tint 2 */
     margin: 1%; /** *Space between the buttons*/
 }
 #footer div p a{
