@@ -267,6 +267,10 @@ var clear_all_string = function(){
 };
 /* **display function: shows parameter into the calculator's display. */
 var display = function(display_this){
+    if (typeof(display_this) == 'undefined') {
+        return;
+    }
+    display_this = parseFloat(parseFloat(display_this).toPrecision(10)); /* Round to 10. Solves the binary number problem */
     $("#display").html(display_this);
     return $("#display").text();
 };
