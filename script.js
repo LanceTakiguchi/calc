@@ -141,6 +141,7 @@ var handle_type = function(button){
                     equation_string_array[0],
                     equation_string_array[1]
                 );
+                solution = round(solution);
                 // ** Player can look back in the complete history to see what is causing every solution to change
                 complete_equation_string = " = " + solution  + "<br />";
                 complete_history_constructor();
@@ -170,6 +171,7 @@ var handle_type = function(button){
                 solution, // **num1
                 equation_string_array[index], // **num2
                 equation_string_array[index-1]); // **operator
+            solution = round(solution);
             was_last_button_operator = false;
             display(solution);
             if (was_last_equals){
@@ -189,6 +191,7 @@ var handle_type = function(button){
                 equation_string_array[index-2], // **num1
                 equation_string_array[index], // **num2
                 equation_string_array[index-1]); // **operator
+            solution = round(solution);
             was_last_button_operator = false;
             display(solution);
             complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
@@ -267,10 +270,10 @@ var clear_all_string = function(){
 };
 /* **display function: shows parameter into the calculator's display. */
 var display = function(display_this){
-    if (typeof(display_this) == 'undefined') {
-        return;
-    }
-    display_this = parseFloat(parseFloat(display_this).toPrecision(10)); /* Round to 10. Solves the binary number problem */
+    // if (typeof(display_this) == 'undefined') {
+    //     return;
+    // }
+    // display_this = parseFloat(parseFloat(display_this).toPrecision(10)); /* Round to 10. Solves the binary number problem */
     $("#display").html(display_this);
     return $("#display").text();
 };
@@ -299,7 +302,6 @@ var complete_history_constructor = function(){
     var $history_a = $("<a>").html(complete_equation_string);
     var $history_li = $("<li>", {class:"dropdown"});
     $($history_li).append($history_a);
-    /*$("#history_dropdown_items").append($history_li);*/
     $("#history_dropdown_items").prepend($history_li);
     return complete_equation_string;
 };
@@ -343,3 +345,11 @@ var clear_all = function(){
     index = 0;
     was_last_button_operator = null;
 };
+/**
+ * [Rounds off the binary imprecision js problem when working with decimals description]
+ * @param  {[String or Int or Float]} num [Number that may need to be rounded]
+ * @return {[Float]}     [Number that has been rounded]
+ */
+var round = function(num){
+    return parseFloat(parseFloat(num).toPrecision(10));
+}
