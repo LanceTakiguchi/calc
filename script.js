@@ -34,7 +34,7 @@ var determine_type = function(button){
 };
 //* **The brain that sorts what to do with the last input */
 /* ** It is passed an object with type & value of the last button input and then determines what to call according
-        to certain conditions */
+to certain conditions */
 var handle_type = function(button){
     if(button.type == "operator"){
         was_last_ce = false;
@@ -42,9 +42,9 @@ var handle_type = function(button){
         if(was_last_equals){
             if(solution == "Error"){ // ** If Ex: 1/0="Error" operator, then just reset completely
                 was_last_equals = null;
-                clear_all_string();
-                clear_all();
-                return;
+            clear_all_string();
+            clear_all();
+            return;
             }else{ // ** Handle case where, ex: num op num = op
                 clear_all_string();
                 index = 0;
@@ -103,8 +103,8 @@ var handle_type = function(button){
                 was_last_button_operator = true; // **Because we are clearing the last input, which was a number,
                                                     // the array's last input is now an operator, therefore,
                                                     // the was_last_button_operator flag is true
-            }
-            was_last_ce = true;
+                                                }
+                                                was_last_ce = true;
         }else{ // ** C was pressed; Clear all.
             was_last_ce = false;
             string_into_array(button);
@@ -140,7 +140,7 @@ var handle_type = function(button){
                     first_num,
                     equation_string_array[0],
                     equation_string_array[1]
-                );
+                    );
                 solution = round(solution);
                 // ** Player can look back in the complete history to see what is causing every solution to change
                 complete_equation_string = " = " + solution  + "<br />";
@@ -151,7 +151,7 @@ var handle_type = function(button){
                     first_num,
                     equation_string_array[0],
                     equation_string_array[1]
-                );
+                    );
                 complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
                 complete_history_constructor();
             }
@@ -173,6 +173,9 @@ var handle_type = function(button){
                 equation_string_array[index-1]); // **operator
             solution = round(solution);
             was_last_button_operator = false;
+            if(solution == "Infinity"){
+
+            }
             display(solution);
             if (was_last_equals){
                 complete_equation_string = " = " + solution + "<br />";
@@ -193,8 +196,14 @@ var handle_type = function(button){
                 equation_string_array[index-1]); // **operator
             solution = round(solution);
             was_last_button_operator = false;
-            display(solution);
-            complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
+            if(isNaN(solution)){
+                display("Error");
+                complete_equation_string = " = " + "Error" + "<br />";
+                solution = "Error";
+            }else{
+                display(solution);
+                complete_equation_string = string_equation() + " = " + String(solution) + "<br />";
+            }
             complete_history_constructor();
             /*clear_all_string(); // ** ex: 1 + 1 = = = so that the equation array clears*/
             clear_display_log();
@@ -220,10 +229,10 @@ var handle_type = function(button){
     }
 };
 /* **string_into_array: 1 parameters object with type, value.
-        if it is a number, add to string, if operator, put into next index */
-var string_into_array = function(last_input){
-    if(last_input.type == "operator"){
-        var previous_input = equation_string_array[index -1];
+if it is a number, add to string, if operator, put into next index */
+    var string_into_array = function(last_input){
+        if(last_input.type == "operator"){
+            var previous_input = equation_string_array[index -1];
         // ** See if more than one operator is being pressed in a row
         if(previous_input == "+" || previous_input == "-" || previous_input == "x" || previous_input == "/"){
             equation_string_array[index -1] = last_input.value;
@@ -304,17 +313,17 @@ var complete_history_constructor = function(){
 // ** Takes two numbers and an operator's string.
     // It determines what kind of operation to perform
     // and calls the appropriate operator function and returns the result.
-var equals_operator = function (num1, num2, operator) {
-    if(operator == "+"){
-        return addition_operator(num1, num2);
-    }else if(operator == "-"){
-        return subtraction_operator(num1, num2);
-    }else if(operator == 'x'){
-        return multiplication_operator(num1, num2);
-    }else if(operator == "/"){
-        return division_operator(num1, num2);
-    }
-};
+    var equals_operator = function (num1, num2, operator) {
+        if(operator == "+"){
+            return addition_operator(num1, num2);
+        }else if(operator == "-"){
+            return subtraction_operator(num1, num2);
+        }else if(operator == 'x'){
+            return multiplication_operator(num1, num2);
+        }else if(operator == "/"){
+            return division_operator(num1, num2);
+        }
+    };
 // **Passed 2 numbers. The functions adds them and returns the value.
 var addition_operator = function (num1, num2){
     return Number(num1) + Number(num2);
@@ -346,6 +355,6 @@ var clear_all = function(){
  * @param  {[String or Int or Float]} num [Number that may need to be rounded]
  * @return {[Float]}     [Number that has been rounded]
  */
-var round = function(num){
+ var round = function(num){
     return parseFloat(parseFloat(num).toPrecision(10));
 }
