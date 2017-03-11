@@ -187,8 +187,8 @@ var handle_type = function(button){
         }else if(solution == "Error"){ // When ex: 1/0= =====
             // clear_all(); // Problem: clearing solution means a 3rd equals post 1/0 will not run here but will
                                 // Go to the else right under and give undefined
-            clear_all_string();
-            clear_display_log();
+                                clear_all_string();
+                                clear_display_log();
         }else{ // ** A regular use case. Ex: 1 + 2 = 3
             solution = equals_operator( /* ** Call appropriate operator function */
                 equation_string_array[index-2], // **num1
@@ -268,8 +268,10 @@ if it is a number, add to string, if operator, put into next index */
             }
         }
     }else{ /* **It is a number */
-        current_string += last_input.value;
-        equation_string_array[index] = current_string;
+        if(current_string.length < 10){ // Max minus 1 because there is the one your are going to add
+            current_string += last_input.value;
+            equation_string_array[index] = current_string;
+        }
     }
 };
 // ** Clears all of the strings

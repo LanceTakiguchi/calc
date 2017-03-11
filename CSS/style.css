@@ -76,7 +76,7 @@ html body {
     background-color: #c1dfc4;
     background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); /* 053 Soft Grass */
     margin: auto;
-    font-size: 220%;
+    font-size: 2.2em;
     color: #28303d;
     line-height: 150%; /* Height of numbers displayed */
 }

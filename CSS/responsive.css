@@ -9,6 +9,7 @@
 	}
 	#display {
 		line-height: 100%; /* Height of numbers displayed */
+		font-size: 1.5em;
 	}
 	#calc_body .dropdown-menu { /* ** Set  the Complete History drop down placement */
 		left: 26%;
