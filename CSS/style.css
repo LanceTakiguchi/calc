@@ -89,6 +89,9 @@ html body {
 .dropdown{
     height: 10%;
 }
+body .dropdown-menu>li>a:hover {
+    background-color: transparent;
+}
 .dropdown #history_button {
     height: 80%;
     width: 90%;
