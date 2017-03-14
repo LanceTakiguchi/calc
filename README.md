@@ -12,17 +12,20 @@
 ## Version pv1.1
 * Date: 2017/03/08
 * Description: First feedback round from LFZ. Minor UX & UI Changes.
+
 #### HTML & CSS
 * Contact: links [D: 1 Im: 1] - Redirect project resumes to main website's resume
 * Body: Background [D: 1 Im: 1] - Calculator's background color to whole body
 * Buttons: Text [D: 2 Im: 1] - Center vertically
 * Responsive: History (Optional) [D: 2 Im: 3] - Display history on the side for non-mobile devices
 * Responsive: Text Overflow [D: 1 Im: 1] - The largest numbers runs outside a small screen
+
 #### JS
 * JS: Logic - [D 4: Im: 3] Fix Calculator's code (Prioritize). OOP [D: 5 Im: 3] (Note: Might not get to this)
 * Break JS into multiple files [D: 2 Im: 2]
 * JS: Logic [D: 3 Im: 3] - Infinity multiplied by zero
 * JS: Logic [D: 2 Im: 1] - toPersion method to round to a amount of digits (Solves 0.1+0.1==) (Round at around 15) (then: parseFloat)
+
 #### Github
 * README: Spelling & Grammar [D: 1 Im: 1] - Check
 * README: Syntax [D: 1 Im: 1] - Fix
