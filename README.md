@@ -3,11 +3,16 @@
 * Author: Lance Takiguchi
 * Description: A Calculator with complete history functionality. Powered by JavaScript logic. 
 ## Live Link
-* http://lancetakiguchi.com/apps/calculator/
+* https://lancetakiguchi.github.io/calc/
 ## Portfolio
-* http://lancetakiguchi.com/
+* To be created
 
 ![alt tag](http://lancetakiguchi.com/assets/images/apps/calc_app.png?raw=true "Calculator pv1.0 | Lance Takiguchi App")
+
+## Changed to Github Pages
+* Date: 2018/05/23
+* Description: Changed project to be hosted on Github Pages, having deactivated my website, lancetakiguchi.com
+* Note: There a number of styling bugs that has occurred do to this in hosting. These are to be fixed in the future.
 
 ## Version pv1.1
 * Date: 2017/03/08
